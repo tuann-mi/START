@@ -6,7 +6,7 @@ export default function Dashboard() {
       <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">Dashboard</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <DashboardCard title="Upcoming Appointments" count={5} />
-        <DashboardCard title="Total Customers" count={120} />
+        <DashboardCard title="Total Sites" count={120} />
         <DashboardCard title="Recent Activities" count={10} />
       </div>
       <div className="mt-8">
