@@ -24,8 +24,9 @@ jobs:
       - name: npm install, build, and test
         run: |
           npm install
-          npm run build --if-present
-          npm run test --if-present
+          npm run build
+          npm run test
+          npm run export
       
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
@@ -54,6 +55,5 @@ jobs:
         id: deploy-to-webapp
         with:
           app-name: 'crm-app'
-          slot-name: 'Production'
           package: .
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_3119626CC99346B2BB73ED04F6408EE4 }}
