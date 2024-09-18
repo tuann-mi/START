@@ -24,6 +24,7 @@ jobs:
       - name: npm install, and build
         run: |
           npm ci
+          npm install next@latest react@latest react-dom@latest
           npm run build
       
       - name: Upload artifact for deployment job
@@ -53,5 +54,6 @@ jobs:
         id: deploy-to-webapp
         with:
           app-name: 'crm-app'
+          slot-name: 'Production'
           package: .
           publish-profile: ${{ secrets.PUBLISH_PROFILE }}
