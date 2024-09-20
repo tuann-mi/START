@@ -6,6 +6,7 @@ export default async function handler(req, res) {
     ssl: {
       rejectUnauthorized: false, // This is necessary if you're using a self-signed certificate
     },
+    statement_timeout: 60000,
   });
 
   try {
@@ -38,7 +39,7 @@ export default async function handler(req, res) {
     res.status(200).json(result.rows);
   } catch (error) {
     console.error('Error executing query:', error);
-    res.status(500).json({ error: 'Failed to fetch data' });
+    res.status(500).json({ error: 'Failed to fetch data', details: error.message });
   } finally {
     await client.end();
     console.log('Disconnected from the database.');

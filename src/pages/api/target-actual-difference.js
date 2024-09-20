@@ -6,6 +6,7 @@ export default async function handler(req, res) {
     ssl: {
       rejectUnauthorized: false, // This is necessary if you're using a self-signed certificate
     },
+    statement_timeout: 60000,
   });
 
   try {
