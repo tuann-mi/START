@@ -12,6 +12,7 @@ export default function Navbar() {
     { name: 'Home', href: '/' },
     { name: 'Dashboard', href: '/dashboard' },
     { name: 'Calendar', href: '/calendar' },
+    { name: 'Upload', href: '/upload' },
   ]
 
   return (

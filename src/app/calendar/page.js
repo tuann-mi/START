@@ -1,15 +1,20 @@
+"use client";
+
+import { useState } from 'react';
+import CustomCalendar from '../components/CustomCalendar';
 import Link from 'next/link';
 
-export default function Calendar() {
+export default function CalendarPage() {
+  const [date, setDate] = useState(new Date());
+
   return (
     <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
       <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">Calendar</h1>
       <div className="bg-white dark:bg-gray-800 shadow-lg overflow-hidden rounded-lg">
         <div className="p-6">
           <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">Appointments</h2>
-          {/* Placeholder for calendar component */}
           <div className="border border-gray-200 dark:border-gray-700 p-4 text-center">
-            Calendar component will be implemented here
+            <CustomCalendar date={date} setDate={setDate} />
           </div>
           {/* Placeholder for appointment list */}
           <ul className="mt-4 space-y-2">
