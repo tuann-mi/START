@@ -12,9 +12,15 @@ export default function ThemeProvider({ children }) {
   const [theme, setTheme] = useState('light')
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem('theme') || 'light'
-    setTheme(savedTheme)
-    document.documentElement.classList.toggle('dark', savedTheme === 'dark')
+    const savedTheme = localStorage.getItem('theme')
+    if (savedTheme) {
+      setTheme(savedTheme)
+      document.documentElement.classList.toggle('dark', savedTheme === 'dark')
+    } else {
+      const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+      setTheme(systemPrefersDark ? 'dark' : 'light')
+      document.documentElement.classList.toggle('dark', systemPrefersDark)
+    }
   }, [])
 
   const toggleTheme = () => {
