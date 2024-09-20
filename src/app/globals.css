@@ -25,3 +25,15 @@ body {
     text-wrap: balance;
   }
 }
+
+.w-16 {
+  width: 4rem;
+}
+
+.w-64 {
+  width: 16rem;
+}
+
+.transition-width {
+  transition-property: width;
+}
