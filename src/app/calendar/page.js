@@ -1,14 +1,28 @@
 "use client";
-
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import CustomCalendar from '../components/CustomCalendar';
 import Link from 'next/link';
+import { useSession, signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 export default function CalendarPage() {
+  const router = useRouter();
   const [date, setDate] = useState(new Date());
+  const { data: session, status } = useSession();
+  const [isLoading, setIsLoading] = useState(true);
 
+  useEffect(() => {
+    if (status === 'loading') return;
+    if (!session) {
+      // router.push('/login');
+      // signIn('google', { callbackUrl: router.asPath });
+    }
+  }, [session, status]);
+  
   return (
     <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+      {status === 'unauthenticated' ? (<p className="text-2xl font-bold text-gray-900 dark:text-white">Authenticating...</p>) : (
+        <>
       <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">Calendar</h1>
       <div className="bg-white dark:bg-gray-800 shadow-lg overflow-hidden rounded-lg">
         <div className="p-6">
@@ -25,10 +39,12 @@ export default function CalendarPage() {
         </div>
       </div>
       <div className="mt-8">
-        <Link href="/dashboard" className="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition duration-300 ease-in-out">
+        <Link href="/dashboard" className="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition duration-300 ease-in-out">
           Back to Dashboard
-        </Link>
-      </div>
+          </Link>
+        </div>
+      </>
+      )}
     </div>
   );
 }
