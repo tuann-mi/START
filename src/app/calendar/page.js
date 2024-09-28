@@ -21,8 +21,6 @@ export default function CalendarPage() {
   
   return (
     <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-      {status === 'unauthenticated' ? (<p className="text-2xl font-bold text-gray-900 dark:text-white">Authenticating...</p>) : (
-        <>
       <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">Calendar</h1>
       <div className="bg-white dark:bg-gray-800 shadow-lg overflow-hidden rounded-lg">
         <div className="p-6">
@@ -43,8 +41,6 @@ export default function CalendarPage() {
           Back to Dashboard
           </Link>
         </div>
-      </>
-      )}
     </div>
   );
 }

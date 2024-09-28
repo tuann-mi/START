@@ -19,24 +19,14 @@ export default function Home() {
             <span className="text-green-600">O</span>utreach<br/>
             <span className="text-green-600">S</span>ystem
         </h1>
-        {!session ? (
-          <div className="flex flex-row items-center justify-center space-x-4 shadow-md p-4 rounded-md bg-gray-50 dark:bg-gray-800 w-full max-w-sm mb-12">
-            <p className="text-gray-600 dark:text-gray-300">Please login to continue</p>
-            {/* onClick={() => signIn('google', { callbackUrl: '/' })} */}
-            <Link href="/login" className="bg-green-600 text-white px-6 py-3 rounded-md hover:bg-green-700 transition duration-300 ease-in-out">
-              Login
-            </Link>
-          </div> // Come back to the login stuff later this is just a test
-        ) : (
-          <div className="space-x-4">
+        <div className="space-x-4">
             <Link href="/dashboard" className="bg-green-600 text-white px-6 py-3 rounded-md hover:bg-green-700 transition duration-300 ease-in-out">
               Dashboard
             </Link>
             <Link href="/calendar" className="bg-green-600 text-white px-6 py-3 rounded-md hover:bg-green-700 transition duration-300 ease-in-out">
               Calendar
             </Link>
-          </div>
-        )}
+        </div>
       </div>
     </main>
   );

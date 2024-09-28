@@ -8,6 +8,11 @@ module.exports = {
   ],
   theme: {
   	extend: {
+		fontSize: {
+			'10xl': '96px',
+			'11xl': '128px',
+			'12xl': '144px',
+		},
   		colors: {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',

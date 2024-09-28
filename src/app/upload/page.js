@@ -51,8 +51,6 @@ export default function Upload() {
 
   return (
     <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-      {status === 'unauthenticated' ? (<p className="text-2xl font-bold text-gray-900 dark:text-white">Authenticating...</p>) : (
-        <>
       <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">Upload File</h1>
       <p className="mb-4 text-gray-600 dark:text-gray-300">Upload MCLs, SSWBs, and other documents.</p>
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -62,8 +60,6 @@ export default function Upload() {
         </button>
       </form>
       {message && <p className="mt-4 text-gray-900 dark:text-white">{message}</p>}
-      </>
-      )}
     </div>
   );
 }
