@@ -21,7 +21,7 @@ export default function Sidebar({ onSelectTables }) {
   }, [selectedTables, onSelectTables]);
 
   return (
-    <div id="sidebar" className={`dark:bg-gray-800 dark:text-white h-full ${isNotCollapsed ? 'w-64' : 'w-12'} transition-width duration-500 z-40 flex flex-col`}>
+    <div id="sidebar" className={`bg-gray-100 dark:bg-gray-800 dark:text-white h-full ${isNotCollapsed ? 'w-64' : 'w-12'} transition-width duration-500 z-40 flex flex-col`}>
       <div className="flex justify-end p-2">
         <button onClick={toggleSidebar} className="relative right-2">
           {isNotCollapsed ? '◀' : '▶'}

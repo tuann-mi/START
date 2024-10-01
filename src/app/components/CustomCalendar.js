@@ -4,7 +4,6 @@ import { useEffect } from 'react';
 
 export default function CustomCalendar({ date, setDate }) {
   useEffect(() => {
-    // Apply Tailwind classes to react-calendar elements
     const calendar = document.querySelector('.react-calendar');
     if (calendar) {
       calendar.classList.add('bg-white', 'dark:bg-gray-800', 'text-gray-900', 'dark:text-gray-200', 'rounded-lg', 'shadow-lg');
@@ -32,6 +31,7 @@ export default function CustomCalendar({ date, setDate }) {
       onChange={setDate}
       value={date}
       className="react-calendar"
+      locale="en-US"
     />
   );
 }

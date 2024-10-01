@@ -2,8 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'MiFont';
+  src: url('/fonts/MiFont.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
-  font-family: MiFont, Arial, Helvetica, sans-serif;
+  font-family: 'MiFont', sans-serif;
 }
 
 @layer utilities {
@@ -33,12 +40,6 @@ body {
   transition-property: width;
 }
 
-@font-face {
-  font-family: 'MiFont';
-  src: url('/fonts/MiFont.woff2') format('woff2');
-  font-weight: normal;
-  font-style: normal;
-}
 
 @layer base {
   :root {
@@ -105,6 +106,21 @@ body {
   }
 }
 
-.michigan-global-button {
-  background: linear-gradient(45deg, #1e7a87, #0876a7, #287c78);
+@layer components {
+  .michigan-global-button {
+    background: linear-gradient(45deg, #1e7a87, #0876a7, #287c78);
+  }
+  .som-icon {
+    width: 4.5rem;
+    height: 4.5rem;
+    background-image: linear-gradient(135deg, #28807c, #0077a7);
+    padding: 0.55rem 0.75rem;
+    margin-left: -1.25rem;
+    margin-top: -0.5rem;
+    margin-bottom: -0.5rem;
+  }
+  .som-icon svg {
+    fill: #fff !important;
+  }
+  
 }
