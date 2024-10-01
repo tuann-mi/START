@@ -5,16 +5,20 @@ import './globals.css';
 import ThemeProvider from './components/ThemeProvider.js';
 import Navbar from './components/Navbar.js';
 import { SessionProvider } from 'next-auth/react';
+import MiHeader from './components/MiHeader.js';
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ['latin'] }); 
 
 export default function RootLayout({ children }) {
+  
+
   return (
     <SessionProvider>
       <html lang="en" suppressHydrationWarning>
-        <body className={`${inter.className} bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300 h-screen flex flex-col`}>
+        <body className={`${inter.className} dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300 h-screen flex flex-col`}>
           <ThemeProvider>
             <div className="flex-grow flex flex-col h-screen">
+              <MiHeader />
               <Navbar />
               <main className="flex-grow flex items-center justify-center">{children}</main>
               <footer className="bg-white dark:bg-gray-800 shadow-inner py-4">
