@@ -4,7 +4,7 @@ export default async function handler(req, res) {
   const client = new Client({
     connectionString: process.env.DATABASE_URL,
     ssl: {
-      rejectUnauthorized: false, // This is necessary if you're using a self-signed certificate
+      rejectUnauthorized: false,
     },
     statement_timeout: 60000,
   });

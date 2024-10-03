@@ -127,22 +127,22 @@ export default function Dashboard() {
     ],
   };
 
-  const handlePasswordSubmit = (password) => {
-    const overridePassword = process.env.NEXT_PUBLIC_DEV_OVERRIDE_PASSWORD;
-    if (password === overridePassword) {
-      setIsOverride(true);
-    } else {
-      alert('Incorrect password');
-    }
-  };
+  // const handlePasswordSubmit = (password) => {
+  //   const overridePassword = process.env.NEXT_PUBLIC_DEV_OVERRIDE_PASSWORD;
+  //   if (password === overridePassword) {
+  //     setIsOverride(true);
+  //   } else {
+  //     alert('Incorrect password');
+  //   }
+  // };
 
   if (status === 'loading') {
     return <div>Loading...</div>;
   }
 
-  if (!session && !isOverride) {
-    return <PasswordPrompt onSubmit={handlePasswordSubmit} />;
-  }
+  // if (!session && !isOverride) {
+  //   return <PasswordPrompt onSubmit={handlePasswordSubmit} />;
+  // }
 
   return (
     <div id="dashboard-page" className="flex w-screen h-full max-w-full bg-white dark:bg-gray-900">
@@ -204,25 +204,25 @@ export default function Dashboard() {
             <div id="dashboard-tables-container" className="flex w-full">
               <div id="dashboard-tables" className="flex-grow py-4 mt-4 overflow-x-auto">
                 {selectedTables.includes('workOrders') && (
-                  <div className="table-container max-h-96 overflow-x-scroll mb-8 rounded-md p-4 bg-gray-100 dark:bg-gray-800">
+                  <div className="overflow-x-scroll mb-8 rounded-md p-4 bg-gray-100 dark:bg-gray-800">
                     <h1 className="text-xl mb-4 text-gray-900 dark:text-white font-bold">Work Orders</h1>
                     <DataTable data={sortedData(workOrdersData)} columns={columns.workOrders} />
                   </div>
                 )}
                 {selectedTables.includes('targetActual') && (
-                  <div className="table-container max-h-96 overflow-x-scroll mb-8 rounded-md p-4 bg-gray-100 dark:bg-gray-800">
+                  <div className="overflow-x-scroll mb-8 rounded-md p-4 bg-gray-100 dark:bg-gray-800">
                     <h1 className="text-xl mb-4 text-gray-900 dark:text-white font-bold">Target vs Actual</h1>
                     <DataTable data={sortedData(targetActualData)} columns={columns.targetActual} />
                   </div>
                 )}
                 {selectedTables.includes('samplingStatus') && (
-                  <div className="table-container max-h-96 overflow-x-scroll mb-8 rounded-md p-4 bg-gray-100 dark:bg-gray-800">
+                  <div className="overflow-x-scroll mb-8 rounded-md p-4 bg-gray-100 dark:bg-gray-800">
                     <h1 className="text-xl mb-4 text-gray-900 dark:text-white font-bold">Sampling Round Status</h1>
                     <DataTable data={sortedData(samplingStatusData)} columns={columns.samplingStatus} />
                   </div>
                 )}
                 {selectedTables.includes('callTracking') && (
-                  <div className="table-container max-h-96 overflow-x-scroll mb-8 rounded-md p-4 bg-gray-100 dark:bg-gray-800">
+                  <div className="overflow-x-scroll mb-8 rounded-md p-4 bg-gray-100 dark:bg-gray-800">
                     <h1 className="text-xl mb-4 text-gray-900 dark:text-white font-bold">Call Tracking</h1>
                     <DataTable data={sortedData(samplingStatusData)} columns={columns.samplingStatus} />
                   </div>

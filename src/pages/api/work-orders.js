@@ -4,7 +4,7 @@ export default async function handler(req, res) {
   const client = new Client({
     connectionString: process.env.DATABASE_URL,
     ssl: {
-      rejectUnauthorized: false, // This is necessary if you're using a self-signed certificate
+      rejectUnauthorized: false,
     },
     statement_timeout: 60000,
   });
@@ -29,10 +29,10 @@ export default async function handler(req, res) {
             pi.sampling_eligibility,
             pi.sampling_round
         FROM
-            work_orders wo
-            LEFT JOIN address_info ai ON wo.id_address::bigint = ai.id_address::bigint
+            workorders wo
+            LEFT JOIN address_info ai ON wo.id_address = ai.id_address
             LEFT JOIN program_info pi ON ai.id_address = pi.id_address
-            LEFT JOIN site_info_sampling si ON ai.id_site::bigint = si.id_site::bigint
+            LEFT JOIN site_info_sampling si ON ai.id_site = si.id_site
         LIMIT 5;
     `);
     console.log('Full query executed successfully:', result.rows);

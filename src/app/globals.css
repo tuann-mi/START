@@ -122,5 +122,7 @@ body {
   .som-icon svg {
     fill: #fff !important;
   }
-  
+  .som-gradient {
+    color: linear-gradient(135deg, #28807c, #0077a7);
+  }
 }

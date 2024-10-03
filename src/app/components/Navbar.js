@@ -47,7 +47,7 @@ export default function Navbar() {
                   className={`${
                     pathname === item.href
                       ? 'border-green-500 text-gray-900 dark:text-white'
-                      : 'border-transparent text-gray-500 dark:text-gray-300 hover:border-gray-300 dark:hover:border-gray-700 hover:text-gray-700 dark:hover:text-gray-200'
+                      : 'border-transparent text-gray-500 dark:text-gray-300 hover:border-gray-300 hover:text-gray-700 dark:hover:text-gray-100'
                   } inline-flex items-center px-1 pt-1 border-b-2 text-md font-medium`}
                 >
                   {item.name}

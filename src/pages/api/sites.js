@@ -15,18 +15,7 @@ export default async function handler(req, res) {
     console.log('Connected to the database.');
 
     const result = await client.query(`
-        select
-            ai.street_num || ' ' || ai.street_name as address,
-            ai.site_name,
-            sd.sample_date,
-            l.lab_name,
-            a.analyte_name_1 as analyte,
-        sd.sample_value
-        from
-            site_data sd
-            join address_info ai on sd.id_address = ai.id_address
-            join labs l on sd.id_lab = l.id_lab
-            join analytes a on sd.id_analyte = a.id_analyte
+        select site_name from site_info_sampling;        
     `);
     console.log('Full query executed successfully:', result.rows);
     res.status(200).json(result.rows);
