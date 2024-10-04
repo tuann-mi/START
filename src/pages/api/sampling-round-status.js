@@ -24,7 +24,7 @@ export default async function handler(req, res) {
         si.site_name,
         si.sampling_round_status
       FROM 
-        site_info_sampling si
+        site_info si
     `);
     console.log('Full query executed successfully:', result.rows);
     res.status(200).json(result.rows);

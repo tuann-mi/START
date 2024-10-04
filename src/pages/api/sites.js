@@ -15,7 +15,7 @@ export default async function handler(req, res) {
     console.log('Connected to the database.');
 
     const result = await client.query(`
-        select site_name from site_info_sampling;        
+        select site_name from site_info;        
     `);
     console.log('Full query executed successfully:', result.rows);
     res.status(200).json(result.rows);

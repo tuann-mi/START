@@ -32,7 +32,7 @@ export default async function handler(req, res) {
             workorders wo
             LEFT JOIN address_info ai ON wo.id_address = ai.id_address
             LEFT JOIN program_info pi ON ai.id_address = pi.id_address
-            LEFT JOIN site_info_sampling si ON ai.id_site = si.id_site
+            LEFT JOIN site_info si ON ai.id_site = si.id_site
         LIMIT 5;
     `);
     console.log('Full query executed successfully:', result.rows);
