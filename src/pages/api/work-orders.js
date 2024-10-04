@@ -20,7 +20,7 @@ export default async function handler(req, res) {
             ai.street_num || ' ' || ai.street_name || ' ' || ai.street_type as address,
             wo.workorder_type,
             wo.workorder_status,
-            ai.site_name,
+            si.site_name,
             wo.workorder_scheduled_date,
             wo.workorder_completed_date,
             wo.workorder_record_created_by,
