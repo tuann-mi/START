@@ -17,10 +17,23 @@ export default function Sidebar({ onSelectTables }) {
   };
 
   const fetchSites = async () => {
-    const response = await fetch('/api/sites');
-    const data = await response.json();
-    setSites(data);
-    console.log(data);
+    try {
+      const response = await fetch('/api/sites');
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const data = await response.json();
+      // Process the data
+      setSites(data);
+      console.log(data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      // Handle the error appropriately
+    }
+    // const response = await fetch('/api/sites');
+    // const data = await response.json();
+    // setSites(data);
+    // console.log(data);
   };
 
   const handleCheckboxChange = (table) => {

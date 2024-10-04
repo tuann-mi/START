@@ -24,6 +24,7 @@ export default function Dashboard() {
 
   // TODO: Make this a more generic function that can be used for other tables
   // TODO: Add a dropdown to select the table to fetch data for
+  // TODO: Better error handling
   const fetchData = async () => {
     try {
         setIsLoading(true);
@@ -44,6 +45,10 @@ export default function Dashboard() {
       setWorkOrdersData(workOrdersResult);
       setTargetActualData(targetActualResult);
       setSamplingStatusData(samplingStatusResult);
+
+      console.log(workOrdersResult);
+      console.log(targetActualResult);
+      console.log(samplingStatusResult);
     } catch (error) {
       console.error('Error fetching data:', error);
     } finally {
