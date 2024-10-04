@@ -1,20 +1,33 @@
+"use client";
+
 import Link from 'next/link';
+import { signIn, signOut, useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
+  const router = useRouter();
+  const { data: session, status } = useSession();
+ 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 dark:bg-gray-900">
-      <main className="text-center">
-        <h1 className="text-4xl font-bold mb-6 text-gray-900 dark:text-white">MiEHCOS</h1>
-        <p className="mb-8 text-gray-600 dark:text-gray-300">Manage your workorders, view appointments, and more.</p>
+    <main className="container text-center mx-4">
+      <div className="flex-grow flex flex-col items-center justify-center min-w-max">
+        <h1 className="text-6xl font-bold text-gray-900 dark:text-white text-left mb-12 mt-12">
+            <span className="text-green-600">Mi</span>chigan<br/>
+            <span className="text-green-600">E</span>nvironmental<br/>
+            <span className="text-green-600">H</span>ealth<br/>
+            <span className="text-green-600">C</span>ommunication <p className="inline text-gray-900 dark:text-white">&</p><br/>
+            <span className="text-green-600">O</span>utreach<br/>
+            <span className="text-green-600">S</span>ystem
+        </h1>
         <div className="space-x-4">
-          <Link href="/dashboard" className="bg-indigo-600 text-white px-6 py-3 rounded-md hover:bg-indigo-700 transition duration-300 ease-in-out">
-            Dashboard
-          </Link>
-          <Link href="/calendar" className="bg-green-600 text-white px-6 py-3 rounded-md hover:bg-green-700 transition duration-300 ease-in-out">
-            Calendar
-          </Link>
+            <Link href="/dashboard" className="bg-green-600 text-white px-6 py-3 rounded-md hover:bg-green-700 transition duration-300 ease-in-out">
+              Dashboard
+            </Link>
+            <Link href="/calendar" className="bg-green-600 text-white px-6 py-3 rounded-md hover:bg-green-700 transition duration-300 ease-in-out">
+              Calendar
+            </Link>
         </div>
-      </main>
-    </div>
+      </div>
+    </main>
   );
 }

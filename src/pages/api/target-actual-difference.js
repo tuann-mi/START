@@ -4,7 +4,7 @@ export default async function handler(req, res) {
   const client = new Client({
     connectionString: process.env.DATABASE_URL,
     ssl: {
-      rejectUnauthorized: false, // This is necessary if you're using a self-signed certificate
+      rejectUnauthorized: false,
     },
     statement_timeout: 60000,
   });
@@ -26,7 +26,7 @@ export default async function handler(req, res) {
         si.num_homes_sampled_actual AS actual,
         (si.num_homes_sampled_actual - si.num_homes_sampled_target) AS difference
       FROM 
-        site_info_sampling si
+        site_info si
     `);
     console.log('Full query executed successfully:', result.rows);
     res.status(200).json(result.rows);
