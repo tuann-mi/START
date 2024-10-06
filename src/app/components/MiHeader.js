@@ -10,7 +10,7 @@ export default function MiHeader() {
                 </a>
             </div>
             <div className="flex flex-col ml-4">
-                <h1 className="text-2xl font-medium text-gray-900 dark:text-white">MiEHCOS</h1>
+                <h1 className="text-2xl font-bold text-gray-900 dark:text-white">MiEHCOS</h1>
                 <p className="text-md text-gray-500 dark:text-gray-400 font-light">Michigan Department of Health and Human Services</p>
             </div>
         </div>

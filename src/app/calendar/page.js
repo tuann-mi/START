@@ -50,9 +50,9 @@ export default function CalendarPage() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-      <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">Calendar</h1>
-      <CustomCalendar date={date} setDate={setDate} />
+    <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 w-1/2">
+      <h1 className="text-2xl font-medium text-gray-900 dark:text-white mb-6 display-title">Calendar</h1>
+      {/* <CustomCalendar date={date} setDate={setDate} /> */}
 
       <div className="bg-white dark:bg-gray-800 shadow-lg overflow-hidden rounded-lg mt-8 mb-8 p-6">
         <p className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">Upcoming Appointments</p>
@@ -84,7 +84,7 @@ export default function CalendarPage() {
         </div>
       </div>
       <div className="mt-8">
-        <Link href="/dashboard" className="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition duration-300 ease-in-out">
+        <Link href="/dashboard" className="bg-som-primary text-white px-4 py-2 rounded-md hover:bg-som-secondary dark:hover:bg-som-secondary-dark transition duration-300 ease-in-out">
           Back to Dashboard
         </Link>
       </div>

@@ -14,6 +14,17 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
+import { Skeleton } from "@/components/ui/skeleton"
+
 
 export default function Dashboard() {
   const router = useRouter();
@@ -148,7 +159,11 @@ export default function Dashboard() {
   // };
 
   if (status === 'loading') {
-    return <div>Loading...</div>;
+    return (
+      <div>
+          Loading...
+      </div>
+  );
   }
 
   // if (!session && !isOverride) {
@@ -171,11 +186,11 @@ export default function Dashboard() {
               </BreadcrumbList>
             </Breadcrumb>
             <div id="dashboard-header-container" className="mb-4">
-              <h1 className="text-2xl font-medium text-gray-900 dark:text-white mb-2">Dashboard</h1>
+              <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Dashboard</h1>
             </div>
-            <div id="general-info-container" className="rounded-md p-4 bg-gray-100 dark:bg-gray-800">
-                <h1 className="text-xl mb-4 text-gray-900 dark:text-white font-medium">Overview</h1>
-                <div id="general-info-cards-container" className="flex flex-row items-center rounded-md space-x-4 overflow-x-auto pb-4 justify-evenly">
+            <div id="overview-container" className="rounded-md p-4 bg-gray-100 dark:bg-gray-800 flex flex-col shadow-md">
+                <h1 className="text-xl mb-4 text-gray-900 dark:text-white font-bold">Overview</h1>
+                <div id="overview-cards-container" className="flex flex-row items-center rounded-md space-x-4 overflow-x-auto pb-4 justify-evenly">
                     <div className="flex flex-col rounded-md p-4 bg-white shadow-md min-h-full grow">
                       <p className="text-xl font-medium text-gray-500 mb-2">Active Sites</p>
                       <span className="text-2xl font-bold text-gray-900">456</span>
@@ -193,9 +208,27 @@ export default function Dashboard() {
                       <span className="text-2xl font-bold text-gray-900">982,938,475</span>
                     </div>
                 </div>
-                <div id="general-info-charts-container" className="flex flex-row items-center rounded-md space-x-4 overflow-x-auto pb-4 justify-evenly">
-                  
-                  <div className="flex flex-col rounded-md p-4 bg-white shadow-md min-h-full grow">
+                <div id="overview-charts-container" className="flex flex-row rounded-md space-x-4 overflow-x-auto">
+                  <div className="mb-8 rounded-md p-4 bg-white shadow-md">
+                    <h1 className="text-xl mb-4 text-gray-900 font-bold">Recent mailings completed</h1>
+                    <Table>
+                      <TableHeader>
+                        <TableRow className="hover:dark:bg-gray-100">
+                          <TableHead>Site Name</TableHead>
+                          <TableHead>Address</TableHead>
+                          <TableHead>Date Sent</TableHead>
+                          <TableHead>Sent By</TableHead>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody>
+                        <TableRow className="text-gray-900 dark:hover:bg-gray-100">
+                          <TableCell>Site 1</TableCell>
+                          <TableCell>1234 Main St</TableCell>
+                          <TableCell>2024-01-01</TableCell>
+                          <TableCell>John Doe</TableCell>
+                        </TableRow>
+                      </TableBody>
+                    </Table>
                   </div>
                 </div>
             </div>

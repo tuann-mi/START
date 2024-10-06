@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Button from './Button';
 
 export default function EventForm({ onSubmit }) {
   const [title, setTitle] = useState('');
@@ -23,7 +24,8 @@ export default function EventForm({ onSubmit }) {
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          className="mt-1 block w-full border-gray-300 rounded-md shadow-md p-2"
+          className="mt-1 block w-full border-gray-300 rounded-md shadow-md p-2 placeholder:text-gray-400 text-black"
+          placeholder="Event Title"
           required
         />
       </div>
@@ -33,7 +35,7 @@ export default function EventForm({ onSubmit }) {
           type="date"
           value={date}
           onChange={(e) => setDate(e.target.value)}
-          className="mt-1 block w-full border-gray-300 rounded-md shadow-md p-2"
+          className="mt-1 block w-full border-gray-300 rounded-md shadow-md p-2 placeholder:text-gray-400 text-black"
           required
         />
       </div>
@@ -43,7 +45,7 @@ export default function EventForm({ onSubmit }) {
           type="time"
           value={time}
           onChange={(e) => setTime(e.target.value)}
-          className="mt-1 block w-full border-gray-300 rounded-md shadow-md p-2"
+          className="mt-1 block w-full border-gray-300 rounded-md shadow-md p-2 placeholder:text-gray-400 text-black"
           required
         />
       </div>
@@ -53,15 +55,15 @@ export default function EventForm({ onSubmit }) {
           type="text"
           value={participants}
           onChange={(e) => setParticipants(e.target.value)}
-          className="mt-1 block w-full border-gray-300 rounded-md shadow-md p-2"
+          className="mt-1 block w-full border-gray-300 rounded-md shadow-md p-2 placeholder:text-gray-400 text-black"
+          placeholder="bob@example.com, jane@example.com, john@example.com"
         />
       </div>
-      <button
+      
+      <Button
+        text="Schedule Event"
         type="submit"
-        className="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition duration-300 ease-in-out"
-      >
-        Schedule Event
-      </button>
+      />
     </form>
   );
 }

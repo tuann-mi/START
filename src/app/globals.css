@@ -97,15 +97,6 @@ body {
   }
 }
 
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-}
-
 @layer components {
   .michigan-global-button {
     background: linear-gradient(45deg, #1e7a87, #0876a7, #287c78);
