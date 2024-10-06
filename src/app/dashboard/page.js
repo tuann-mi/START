@@ -6,6 +6,14 @@ import { useSession, signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import DataTable from '../components/DataTable';
 import PasswordPrompt from '../components/DevPasswordPrompt.js';
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb"
 
 export default function Dashboard() {
   const router = useRouter();
@@ -151,12 +159,23 @@ export default function Dashboard() {
     <div id="dashboard-page-container" className="flex w-screen h-full max-w-full bg-white dark:bg-gray-900 transition-colors duration-300">
           <Sidebar onSelectTables={setSelectedTables} />
           <div id="dashboard-content-container" className="flex-grow p-6 w-96">
+            <Breadcrumb className="mb-4">
+              <BreadcrumbList>
+                <BreadcrumbItem>
+                  <BreadcrumbLink href="/">Home</BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator />
+                <BreadcrumbItem>
+                  <BreadcrumbLink href="/dashboard">Dashboard</BreadcrumbLink>
+                </BreadcrumbItem>
+              </BreadcrumbList>
+            </Breadcrumb>
             <div id="dashboard-header-container" className="mb-4">
               <h1 className="text-2xl font-medium text-gray-900 dark:text-white mb-2">Dashboard</h1>
             </div>
             <div id="general-info-container" className="rounded-md p-4 bg-gray-100 dark:bg-gray-800">
-                <h1 className="text-xl mb-4 text-gray-900 dark:text-white font-medium">General Info</h1>
-                <div className="flex flex-row items-center rounded-md space-x-4 overflow-x-auto pb-4 justify-evenly">
+                <h1 className="text-xl mb-4 text-gray-900 dark:text-white font-medium">Overview</h1>
+                <div id="general-info-cards-container" className="flex flex-row items-center rounded-md space-x-4 overflow-x-auto pb-4 justify-evenly">
                     <div className="flex flex-col rounded-md p-4 bg-white shadow-md min-h-full grow">
                       <p className="text-xl font-medium text-gray-500 mb-2">Active Sites</p>
                       <span className="text-2xl font-bold text-gray-900">456</span>
@@ -173,6 +192,11 @@ export default function Dashboard() {
                       <p className="text-xl font-medium text-gray-500 mb-2">Samples Processed</p>
                       <span className="text-2xl font-bold text-gray-900">982,938,475</span>
                     </div>
+                </div>
+                <div id="general-info-charts-container" className="flex flex-row items-center rounded-md space-x-4 overflow-x-auto pb-4 justify-evenly">
+                  
+                  <div className="flex flex-col rounded-md p-4 bg-white shadow-md min-h-full grow">
+                  </div>
                 </div>
             </div>
             <div id="fetch-data-button-container" className="flex flex-row items-center space-x-4">
