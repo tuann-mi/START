@@ -98,70 +98,79 @@ export default function SitesPage() {
             </BreadcrumbList>
         </Breadcrumb>
         <h1 className="text-xl mb-4 text-gray-900 dark:text-white font-bold">Sites</h1>
-        <div className="flex flex-row rounded-md space-x-4 overflow-x-auto">
-          <div className="mb-8 rounded-md bg-gray-100 dark:bg-gray-800 flex flex-col shadow-md p-4">
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead className="text-black">Site Name</TableHead>
-                  <TableHead className="text-black">Toxicologist</TableHead>
-                  <TableHead className="text-black">Project Manager</TableHead>
-                  <TableHead className="text-black">Sampling Type</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {siteOverview.map((site, index) => (
-                  <TableRow key={index}>
-                    <TooltipProvider>
-                      <Tooltip>
-                        <TooltipTrigger>
-                          <TableCell id="site-name-cell" className="font-bold">
-                            <Sheet>
-                              <SheetTrigger className="text-som-primary hover:underline">{site.site_name}</SheetTrigger>
-                              <SheetContent className="overflow-y-auto w-full">
-                                <SheetHeader>
-                                  <SheetTitle>{site.site_name}</SheetTitle>
-                                </SheetHeader>
-                                <SheetDescription>
-                                  <p>Toxicologist: {site.toxicologist}</p>
-                                  <p>Project Manager: {site.project_manager}</p>
-                                  <p>Sampling Type: {site.sampling_type}</p>
-                                </SheetDescription>
-                                <Separator className="my-4"/>
-                                <Table>
-                                  <TableHeader>
-                                    <TableRow>
-                                      <TableHead className="text-black">Addresses</TableHead>
-                                      <TableHead className="text-black">Program</TableHead>
-                                    </TableRow>
-                                  </TableHeader>
-                                  <TableBody>
-                                  {addressInfo
-                                    .filter(address => address.site_name === site.site_name)
-                                    .map((address, index) => (
-                                      <TableRow key={index}>
-                                        <TableCell>{address.address}</TableCell>
-                                        <TableCell>{address.sampling_type}</TableCell>
-                                      </TableRow>
-                                    ))}
-                                  </TableBody>
-                                </Table>
-                              </SheetContent>
-                            </Sheet>
-                          </TableCell>
-                        </TooltipTrigger>
-                        <TooltipContent>
-                          <p>Click to view more information</p>
-                        </TooltipContent>
-                      </Tooltip>
-                    </TooltipProvider>
-                    <TableCell>{site.toxicologist}</TableCell>
-                    <TableCell>{site.project_manager}</TableCell>
-                    <TableCell>{site.sampling_type}</TableCell>
+        <div className="flex flex-col justify-start rounded-md">
+          <div className="mb-8 rounded-md bg-gray-100 dark:bg-gray-800 flex flex-col shadow-md p-4 w-full">
+            {/* TODO: Add filter options, sorting options, pagination, and other sample data */}
+            <div className="bg-white rounded-md shadow-md p-4">
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead className="text-black">Site Name</TableHead>
+                    <TableHead className="text-black">Sampling Type</TableHead>
+                    <TableHead className="text-black">Toxicologist</TableHead>
+                    <TableHead className="text-black">Project Manager</TableHead>
+                    <TableHead className="text-black">DEH Contact</TableHead>
+                    <TableHead className="text-black">EGLE Contact</TableHead>
+                    <TableHead className="text-black">LHD Contact</TableHead>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+                </TableHeader>
+                <TableBody>
+                  {siteOverview.map((site, index) => (
+                    <TableRow key={index}>
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger>
+                            <TableCell id="site-name-cell" className="font-bold">
+                              <Sheet>
+                                <SheetTrigger className="text-som-primary hover:underline">{site.site_name}</SheetTrigger>
+                                <SheetContent className="overflow-y-auto w-full">
+                                  <SheetHeader>
+                                    <SheetTitle>{site.site_name}</SheetTitle>
+                                  </SheetHeader>
+                                  <SheetDescription>
+                                    <p>Toxicologist: {site.toxicologist}</p>
+                                    <p>Project Manager: {site.project_manager}</p>
+                                    <p>Sampling Type: {site.sampling_type}</p>
+                                  </SheetDescription>
+                                  <Separator className="my-4"/>
+                                  <Table>
+                                    <TableHeader>
+                                      <TableRow>
+                                        <TableHead className="text-black">Addresses</TableHead>
+                                        <TableHead className="text-black">Program</TableHead>
+                                      </TableRow>
+                                    </TableHeader>
+                                    <TableBody>
+                                    {addressInfo
+                                      .filter(address => address.site_name === site.site_name)
+                                      .map((address, index) => (
+                                        <TableRow key={index}>
+                                          <TableCell>{address.address}</TableCell>
+                                          <TableCell>{address.sampling_type}</TableCell>
+                                        </TableRow>
+                                      ))}
+                                    </TableBody>
+                                  </Table>
+                                </SheetContent>
+                              </Sheet>
+                            </TableCell>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p>Click to view more information</p>
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                      <TableCell>{site.sampling_type}</TableCell>
+                      <TableCell>{site.toxicologist}</TableCell>
+                      <TableCell>{site.project_manager}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
+          </div>
+          <div className="mb-8 rounded-md bg-gray-100 dark:bg-gray-800 flex flex-col shadow-md p-4">
+          <p>other stuff</p>
           </div>
         </div>
       </div>
