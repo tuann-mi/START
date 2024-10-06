@@ -91,14 +91,14 @@ export default function DataTable({ data, columns }) {
         <button
           onClick={() => paginate(currentPage - 1)}
           disabled={currentPage === 1}
-          className="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition duration-300 ease-in-out hover:cursor-pointer"
+          className="bg-som-primary text-white px-4 py-2 rounded-md hover:bg-som-primary transition duration-300 ease-in-out hover:cursor-pointer"
         >
           Previous
         </button>
         <button
           onClick={() => paginate(currentPage + 1)}
           disabled={indexOfLastItem >= sortedData.length}
-          className="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition duration-300 ease-in-out hover:cursor-pointer"
+          className="bg-som-primary text-white px-4 py-2 rounded-md hover:bg-som-primary transition duration-300 ease-in-out hover:cursor-pointer"
         >
           Next
         </button>

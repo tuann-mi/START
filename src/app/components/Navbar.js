@@ -4,6 +4,7 @@ import { useSession, signOut, signIn } from 'next-auth/react';
 import { useTheme } from './ThemeProvider';
 import { usePathname, useRouter } from 'next/navigation';
 import Image from 'next/image';
+import { Switch } from "@/components/ui/switch"
 
 export default function Navbar() {
   const router = useRouter();
@@ -29,7 +30,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="bg-gray-50 dark:bg-gray-800 shadow-sm w-full sticky top-0 z-50">
+    <nav className="bg-gray-100 dark:bg-gray-800 shadow-sm w-full sticky top-0 z-50">
       <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div id="navbar-left" className="flex">
@@ -46,7 +47,7 @@ export default function Navbar() {
                   href={item.href}
                   className={`${
                     pathname === item.href
-                      ? 'border-green-500 text-gray-900 dark:text-white'
+                      ? 'border-som-primary text-gray-900 dark:text-white'
                       : 'border-transparent text-gray-500 dark:text-gray-300 hover:border-gray-300 hover:text-gray-700 dark:hover:text-gray-100'
                   } inline-flex items-center px-1 pt-1 border-b-2 text-md font-medium`}
                 >
@@ -115,12 +116,22 @@ export default function Navbar() {
               </button>
               </>
             )}
-            <button
+            
+            <div className="hidden sm:flex items-center ml-2">
+              <Switch
+                checked={theme === 'dark'}
+                onCheckedChange={() => {toggleTheme(); console.log("Theme set to: ", theme);}}
+              />
+              <span className="ml-2">
+                {theme === 'dark' ? 'Dark Mode' : 'Light Mode'}
+              </span>
+            </div>
+            {/* <button
               onClick={() => {toggleTheme(); console.log("Theme set to: ", theme);}}
               className="hidden sm:block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition duration-200"
             >
               {theme === 'dark' ? 'Set to light-mode' : 'Set to dark-mode'}
-            </button>
+            </button> */}
           </div>
         </div>
       </div>

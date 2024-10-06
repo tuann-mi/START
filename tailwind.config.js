@@ -53,7 +53,10 @@ module.exports = {
   				'3': 'hsl(var(--chart-3))',
   				'4': 'hsl(var(--chart-4))',
   				'5': 'hsl(var(--chart-5))'
-  			}
+  			},
+			'som-primary': '#277c78',
+			'som-secondary': '#142d3e',
+			'som-secondary-dark': '#204965',
   		},
   		borderRadius: {
   			lg: 'var(--radius)',

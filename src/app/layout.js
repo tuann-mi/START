@@ -6,12 +6,12 @@ import ThemeProvider from './components/ThemeProvider.js';
 import Navbar from './components/Navbar.js';
 import { SessionProvider } from 'next-auth/react';
 import MiHeader from './components/MiHeader.js';
+// import '@migov/digital-guidelines-core/dist/digital-guidelines-core/digital-guidelines-core.esm.js';
+// import '@migov/digital-guidelines-core/dist/digital-guidelines-core/digital-guidelines-core.css';
 
 const inter = Inter({ subsets: ['latin'] }); 
 
 export default function RootLayout({ children }) {
-  
-
   return (
     <SessionProvider>
       <html lang="en" suppressHydrationWarning>
@@ -21,7 +21,7 @@ export default function RootLayout({ children }) {
               <MiHeader />
               <Navbar />
               <main className="flex-grow flex items-center justify-center">{children}</main>
-              <footer className="bg-white dark:bg-gray-800 shadow-inner py-4">
+              <footer className="bg-gray-100 dark:bg-gray-800 shadow-inner py-4">
                 <div className="max-w-7xl mx-auto text-center text-sm">
                   2024 Tuan Nguyen
                 </div>
