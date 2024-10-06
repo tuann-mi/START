@@ -1,12 +1,17 @@
 import { useState, useEffect } from 'react';
 export default function Sidebar({ onSelectTables }) {
-  const [isNotCollapsed, setIsNotCollapsed] = useState(window.innerWidth > 768);
+  const [isNotCollapsed, setIsNotCollapsed] = useState(true);
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setIsNotCollapsed(window.innerWidth > 768);
+    }
+  }, []);
   const toggleSidebar = () => {
     setIsNotCollapsed(!isNotCollapsed);
   };
   const sidebarOptions = ['Dashboard', 'Sites', 'Addresses']
   return (
-    <div id="sidebar" className={`bg-gray-100 dark:bg-gray-800 dark:text-white h-full ${isNotCollapsed ? 'w-48' : 'w-12'} transition-width duration-500 z-40 flex flex-col`}>
+    <div id="sidebar" className={`bg-gray-100 dark:bg-gray-800 dark:text-white h-full ${isNotCollapsed ? 'w-50' : 'w-12'} transition-width duration-500 z-40 flex flex-col`}>
       <div className="flex justify-end p-2">
         <button onClick={toggleSidebar} className="relative right-2">
           {isNotCollapsed ? '◀' : '▶'}
