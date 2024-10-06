@@ -57,6 +57,7 @@ module.exports = {
 			'som-primary': '#277c78',
 			'som-secondary': '#142d3e',
 			'som-secondary-dark': '#204965',
+			'som-tertiary': '#53aca7',
   		},
   		borderRadius: {
   			lg: 'var(--radius)',
