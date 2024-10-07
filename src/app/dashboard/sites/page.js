@@ -101,6 +101,7 @@ export default function SitesPage() {
         <div className="flex flex-col justify-start rounded-md">
           <div className="mb-8 rounded-md bg-gray-100 dark:bg-gray-800 flex flex-col shadow-md p-4 w-full">
             {/* TODO: Add filter options, sorting options, pagination, and other sample data */}
+            <h1 className="text-xl mb-4 text-gray-900 dark:text-white font-bold">Overview</h1>
             <div className="bg-white rounded-md shadow-md p-4">
               <Table>
                 <TableHeader>
@@ -122,7 +123,7 @@ export default function SitesPage() {
                           <TooltipTrigger>
                             <TableCell id="site-name-cell" className="font-bold">
                               <Sheet>
-                                <SheetTrigger className="text-som-primary hover:underline">{site.site_name}</SheetTrigger>
+                                <SheetTrigger className="text-som-primary underline">{site.site_name}</SheetTrigger>
                                 <SheetContent className="overflow-y-auto w-full">
                                   <SheetHeader>
                                     <SheetTitle>{site.site_name}</SheetTitle>
@@ -170,7 +171,10 @@ export default function SitesPage() {
             </div>
           </div>
           <div className="mb-8 rounded-md bg-gray-100 dark:bg-gray-800 flex flex-col shadow-md p-4">
-          <p>other stuff</p>
+          <h1 className="text-xl mb-4 text-gray-900 dark:text-white font-bold">Other stuff</h1>
+          <div className="bg-white rounded-md shadow-md p-4">
+            <p>something</p>
+          </div>
           </div>
         </div>
       </div>
