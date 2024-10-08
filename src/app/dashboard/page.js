@@ -186,7 +186,7 @@ export default function Dashboard() {
               </BreadcrumbList>
             </Breadcrumb>
             <div id="dashboard-header-container" className="mb-4">
-              <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Dashboard</h1>
+              <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">Dashboard</h1>
             </div>
             <div id="overview-container" className="rounded-md p-4 bg-gray-100 dark:bg-gray-800 flex flex-col shadow-md">
                 <h1 className="text-xl mb-4 text-gray-900 dark:text-white font-bold">Overview</h1>
@@ -217,6 +217,7 @@ export default function Dashboard() {
                           <TableHead>Site Name</TableHead>
                           <TableHead>Address</TableHead>
                           <TableHead>Date Sent</TableHead>
+                          <TableHead>Treatment Type</TableHead>
                           <TableHead>Sent By</TableHead>
                         </TableRow>
                       </TableHeader>
@@ -225,6 +226,7 @@ export default function Dashboard() {
                           <TableCell>Site 1</TableCell>
                           <TableCell>1234 Main St</TableCell>
                           <TableCell>2024-01-01</TableCell>
+                          <TableCell>Water Softener</TableCell>
                           <TableCell>John Doe</TableCell>
                         </TableRow>
                       </TableBody>

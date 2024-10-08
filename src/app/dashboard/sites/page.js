@@ -97,7 +97,7 @@ export default function SitesPage() {
                 </BreadcrumbItem>
             </BreadcrumbList>
         </Breadcrumb>
-        <h1 className="text-xl mb-4 text-gray-900 dark:text-white font-bold">Sites</h1>
+        <h1 className="text-3xl mb-4 text-gray-900 dark:text-white font-bold">Sites</h1>
         <div className="flex flex-col justify-start rounded-md">
           <div className="mb-8 rounded-md bg-gray-100 dark:bg-gray-800 flex flex-col shadow-md p-4 w-full">
             {/* TODO: Add filter options, sorting options, pagination, and other sample data */}

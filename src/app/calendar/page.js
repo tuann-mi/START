@@ -51,7 +51,7 @@ export default function CalendarPage() {
 
   return (
     <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 w-1/2">
-      <h1 className="text-2xl font-medium text-gray-900 dark:text-white mb-6 display-title">Calendar</h1>
+      <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-6 display-title">Calendar</h1>
       {/* <CustomCalendar date={date} setDate={setDate} /> */}
 
       <div className="bg-white dark:bg-gray-800 shadow-lg overflow-hidden rounded-lg mt-8 mb-8 p-6">
