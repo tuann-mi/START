@@ -26,6 +26,7 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
+  SheetClose,
 } from "@/components/ui/sheet"
 import {
   Tooltip,
@@ -34,12 +35,15 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip"
 import { Separator } from "@/components/ui/separator"
-
+import { useSearchParams } from 'next/navigation';
+import Link from 'next/link';
 export default function SitesPage() {
   let [isLoading, setIsLoading] = useState(false);
   const [siteOverview, setSiteOverview] = useState([]);
   const [addressInfo, setAddressInfo] = useState([]);
-
+  const searchParams = useSearchParams();
+  const siteName = searchParams.get('siteName');
+  const [openSite, setOpenSite] = useState(null);
   const fetchData = async () => {
     try {
         setIsLoading(true);
@@ -70,6 +74,14 @@ export default function SitesPage() {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    if (siteName) {
+      setOpenSite(siteName);
+    } else {
+      setOpenSite(null); // Reset openSite if siteName is not present
+    }
+  }, [siteName]);
+
   if (isLoading) {
     return (
       <div>
@@ -80,9 +92,9 @@ export default function SitesPage() {
 
   return (
     <div id="sites-page-container" className="flex w-screen h-full max-w-full bg-white dark:bg-gray-900 transition-colors duration-300">
-      <Sidebar />
-      <div id="sites-content-container" className="flex-grow p-6 w-96">
-        <Breadcrumb className="mb-4">
+    	<Sidebar />
+      	<div id="sites-content-container" className="flex-grow p-6 w-96">
+        	<Breadcrumb className="mb-4">
             <BreadcrumbList>
                 <BreadcrumbItem>
                     <BreadcrumbLink href="/">Home</BreadcrumbLink>
@@ -96,11 +108,11 @@ export default function SitesPage() {
                     <BreadcrumbLink href="/dashboard/sites">Sites</BreadcrumbLink>
                 </BreadcrumbItem>
             </BreadcrumbList>
-        </Breadcrumb>
-        <h1 className="text-3xl mb-4 text-gray-900 dark:text-white font-bold">Sites</h1>
-        <div className="flex flex-col justify-start rounded-md">
-          <div className="mb-8 rounded-md bg-gray-100 dark:bg-gray-800 flex flex-col shadow-md p-4 w-full">
-            {/* TODO: Add filter options, sorting options, pagination, and other sample data */}
+        	</Breadcrumb>
+        	<h1 className="text-3xl mb-4 text-gray-900 dark:text-white font-bold">Sites</h1>
+        	<div className="flex flex-col justify-start rounded-md">
+          	<div className="mb-8 rounded-md bg-gray-100 dark:bg-gray-800 flex flex-col shadow-md p-4 w-full">
+            	{/* TODO: Add filter options, sorting options, pagination, and other sample data */}
             <h1 className="text-xl mb-4 text-gray-900 dark:text-white font-bold">Overview</h1>
             <div className="bg-white rounded-md shadow-md p-4">
               <Table>
@@ -121,9 +133,23 @@ export default function SitesPage() {
                       <TooltipProvider>
                         <Tooltip>
                           <TooltipTrigger>
-                            <TableCell id="site-name-cell" className="font-bold">
-                              <Sheet>
-                                <SheetTrigger className="text-som-primary underline">{site.site_name}</SheetTrigger>
+                            <TableCell id="site-name-cell">
+                              <Sheet
+                                open={openSite === site.site_name}
+                                onOpenChange={(isOpen) => {
+                                  if (isOpen) {
+                                    setOpenSite(site.site_name);
+                                  } else {
+                                    setOpenSite(null);
+                                  }
+                                }}
+                              >
+                                <SheetTrigger
+                                  className="text-som-primary underline"
+                                  onClick={() => setOpenSite(site.site_name)}
+                                >
+                                  {site.site_name}
+                                </SheetTrigger>
                                 <SheetContent className="overflow-y-auto w-full">
                                   <SheetHeader>
                                     <SheetTitle>{site.site_name}</SheetTitle>
@@ -146,7 +172,7 @@ export default function SitesPage() {
                                       .filter(address => address.site_name === site.site_name)
                                       .map((address, index) => (
                                         <TableRow key={index}>
-                                          <TableCell>{address.address}</TableCell>
+                                          <TableCell><Link href={`/dashboard/addresses?address=${encodeURIComponent(address.address)}`} className="text-som-primary underline">{address.address}</Link></TableCell>
                                           <TableCell>{address.sampling_type}</TableCell>
                                         </TableRow>
                                       ))}

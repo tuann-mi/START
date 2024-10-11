@@ -25,7 +25,6 @@ import {
 } from "@/components/ui/table"
 import { Skeleton } from "@/components/ui/skeleton"
 
-
 export default function Dashboard() {
   const router = useRouter();
   const { data: session, status } = useSession();
