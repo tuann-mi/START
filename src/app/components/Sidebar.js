@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 export default function Sidebar({ onSelectTables }) {
   const [isNotCollapsed, setIsNotCollapsed] = useState(true);
   useEffect(() => {
@@ -14,7 +16,7 @@ export default function Sidebar({ onSelectTables }) {
     <div id="sidebar" className={`bg-gray-100 dark:bg-gray-800 dark:text-white h-full ${isNotCollapsed ? 'w-48' : 'w-12'} transition-width duration-500 z-40 flex flex-col`}>
       <div className="flex justify-end p-2">
         <button onClick={toggleSidebar} className="relative right-2">
-          {isNotCollapsed ? '◀' : '▶'}
+          <FontAwesomeIcon icon={isNotCollapsed ? faChevronLeft : faChevronRight} />
         </button>
       </div>
       <div className={`${isNotCollapsed ? 'block' : 'hidden'} p-2`}>
