@@ -3,14 +3,10 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: 'MiFont';
-  src: url('/fonts/MiFont.woff2') format('woff2');
+  font-family: "MiFont";
+  src: url("/fonts/MiFont.woff2") format("woff2");
   font-weight: normal;
   font-style: normal;
-}
-
-body {
-  font-family: 'MiFont', sans-serif;
 }
 
 @layer utilities {
@@ -39,7 +35,6 @@ body {
 .transition-width {
   transition-property: width;
 }
-
 
 @layer base {
   :root {
