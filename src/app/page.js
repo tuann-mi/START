@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <main className="container text-center mx-4">
       <div className="flex-grow flex flex-col items-center justify-center min-w-max">
-        <h1 className="text-6xl font-bold text-gray-900 dark:text-white text-left mb-12 s">
+        <h1 className="text-6xl font-bold text-gray-900 dark:text-white text-left my-12">
           <span className="text-som-primary">Mi</span>chigan
           <br />
           <span className="text-som-primary">E</span>nvironmental
