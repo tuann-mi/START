@@ -145,7 +145,7 @@ export default function Sites() {
                     <TableCell id="site-name-cell">
                       <TooltipProvider>
                         <Tooltip>
-                          <TooltipTrigger>
+                          <TooltipTrigger asChild>
                             <Sheet
                               open={openSite === site.site_name}
                               onOpenChange={(isOpen) => {
@@ -318,15 +318,6 @@ export default function Sites() {
                                               Owner Mailing City State Zip
                                             </TableHead>
                                             <TableHead className="text-black">
-                                              Owner Preferred Language
-                                            </TableHead>
-                                            <TableHead className="text-black">
-                                              Owner Date Last Verified
-                                            </TableHead>
-                                            <TableHead className="text-black">
-                                              Owner Verification Source
-                                            </TableHead>
-                                            <TableHead className="text-black">
                                               Owner Notes
                                             </TableHead>
                                             <TableHead className="text-black">
@@ -361,105 +352,6 @@ export default function Sites() {
                                             </TableHead>
                                             <TableHead className="text-black">
                                               Tenant Date Last Verified
-                                            </TableHead>
-                                            <TableHead className="text-black">
-                                              Tenant Verification Source
-                                            </TableHead>
-                                            <TableHead className="text-black">
-                                              Tenant Notes
-                                            </TableHead>
-                                            <TableHead className="text-black">
-                                              Mailing Full Name
-                                            </TableHead>
-                                            <TableHead className="text-black">
-                                              Mailing First Name
-                                            </TableHead>
-                                            <TableHead className="text-black">
-                                              Mailing Phone
-                                            </TableHead>
-                                            <TableHead className="text-black">
-                                              Mailing Email
-                                            </TableHead>
-                                            <TableHead className="text-black">
-                                              Mailing Address
-                                            </TableHead>
-                                            <TableHead className="text-black">
-                                              Mailing City State Zip
-                                            </TableHead>
-                                            <TableHead className="text-black">
-                                              Mailing Preferred Language
-                                            </TableHead>
-                                            <TableHead className="text-black">
-                                              Mailing-Sampling Address Match
-                                            </TableHead>
-                                            <TableHead className="text-black">
-                                              Date 1
-                                            </TableHead>
-                                            <TableHead className="text-black">
-                                              Time 1
-                                            </TableHead>
-                                            <TableHead className="text-black">
-                                              Contacted By 1
-                                            </TableHead>
-                                            <TableHead className="text-black">
-                                              Notes 1
-                                            </TableHead>
-                                            <TableHead className="text-black">
-                                              Call Outcome 1
-                                            </TableHead>
-                                            <TableHead className="text-black">
-                                              Date 2
-                                            </TableHead>
-                                            <TableHead className="text-black">
-                                              Time 2
-                                            </TableHead>
-                                            <TableHead className="text-black">
-                                              Contacted By 2
-                                            </TableHead>
-                                            <TableHead className="text-black">
-                                              Notes 2
-                                            </TableHead>
-                                            <TableHead className="text-black">
-                                              Call Outcome 2
-                                            </TableHead>
-                                            <TableHead className="text-black">
-                                              Date 3
-                                            </TableHead>
-                                            <TableHead className="text-black">
-                                              Time 3
-                                            </TableHead>
-                                            <TableHead className="text-black">
-                                              Contacted By 3
-                                            </TableHead>
-                                            <TableHead className="text-black">
-                                              Notes 3
-                                            </TableHead>
-                                            <TableHead className="text-black">
-                                              Call Outcome 3
-                                            </TableHead>
-                                            <TableHead className="text-black">
-                                              Scheduling Status
-                                            </TableHead>
-                                            <TableHead className="text-black">
-                                              Door Knock Needed?
-                                            </TableHead>
-                                            <TableHead className="text-black">
-                                              Date Door Knocked
-                                            </TableHead>
-                                            <TableHead className="text-black">
-                                              Door Knock Outcome
-                                            </TableHead>
-                                            <TableHead className="text-black">
-                                              S123 Sample Date
-                                            </TableHead>
-                                            <TableHead className="text-black">
-                                              S123 Sample Class
-                                            </TableHead>
-                                            <TableHead className="text-black">
-                                              Street Name
-                                            </TableHead>
-                                            <TableHead className="text-black">
-                                              Date Address Standardized
                                             </TableHead>
                                           </TableRow>
                                         </TableHeader>
