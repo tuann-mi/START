@@ -1,4 +1,14 @@
 {
-    "appService.defaultWebAppToDeploy": "/subscriptions/abd3e95c-2229-4f59-a042-a49cc53760b7/resourceGroups/crm-test/providers/Microsoft.Web/sites/crm-app",
-    "appService.deploySubpath": "."
+  "appService.defaultWebAppToDeploy": "/subscriptions/abd3e95c-2229-4f59-a042-a49cc53760b7/resourceGroups/crm-test/providers/Microsoft.Web/sites/crm-app",
+  "appService.deploySubpath": ".",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.formatOnType": false,
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "editor.formatOnSaveMode": "file",
+  "files.autoSave": "onFocusChange",
+  "vs-code-prettier-eslint.prettierLast": false
 }
