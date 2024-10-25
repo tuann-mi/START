@@ -31,7 +31,7 @@ export default function RootLayout({ children }) {
                   <span>2024 Tuan Nguyen</span>
                   <span className="mx-2">|</span>
                   <span>version {process.env.NEXT_PUBLIC_VERSION}</span>
-                  {process.env.NODE_ENV === 'development' && (
+                  {process.env.NODE_ENV === "development" && (
                     <>
                       {console.log(process.env.NODE_ENV)}
                       <span className="mx-2">|</span>
