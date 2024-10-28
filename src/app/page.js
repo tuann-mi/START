@@ -14,15 +14,15 @@ export default function Home() {
         <h1 className="text-6xl font-bold text-gray-900 dark:text-white text-left my-12">
           <span className="text-som-primary">Mi</span>chigan
           <br />
-          <span className="text-som-primary">E</span>nvironmental
+          <span className="text-som-primary">S</span>cheduling,
           <br />
-          <span className="text-som-primary">H</span>ealth
+          <span className="text-som-primary">T</span>racking,
           <br />
-          <span className="text-som-primary">C</span>ommunication &
+          <span className="text-som-primary">A</span>nd
           <br />
-          <span className="text-som-primary">O</span>utreach
+          <span className="text-som-primary">R</span>eporting
           <br />
-          <span className="text-som-primary">S</span>ystem
+          <span className="text-som-primary">T</span>ool
         </h1>
         <div className="space-x-8">
           <Link
