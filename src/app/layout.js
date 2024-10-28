@@ -33,7 +33,6 @@ export default function RootLayout({ children }) {
                   <span>version {process.env.NEXT_PUBLIC_VERSION}</span>
                   {process.env.NODE_ENV === "development" && (
                     <>
-                      {console.log(process.env.NODE_ENV)}
                       <span className="mx-2">|</span>
                       <span className="text-red-500">dev mode</span>
                     </>
