@@ -22,6 +22,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import PageHeader from "../../components/PageHeader";
 import { Skeleton } from "@/components/ui/skeleton";
+import { ProgramBadge, ProgramsList } from "@/app/components/ProgramBadge";
 export default function Addresses() {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState([]);
@@ -42,6 +43,7 @@ export default function Addresses() {
     if (typeof window !== "undefined") {
       // Check if sessionStorage is available
       const storedData = sessionStorage.getItem("addressesData");
+      // const storedData = false;
       if (storedData) {
         console.log("storedData", JSON.parse(storedData));
         setData(JSON.parse(storedData));
@@ -50,7 +52,7 @@ export default function Addresses() {
       } else {
         const fetchData = async () => {
           try {
-            const response = await fetch("/api/address-overview");
+            const response = await fetch("/api/db-queries/address-overview");
             const data = await response.json();
             setData(data);
             sessionStorage.setItem("addressesData", JSON.stringify(data));
@@ -91,24 +93,20 @@ export default function Addresses() {
                 <TableRow>
                   <TableHead className="text-black">Address</TableHead>
                   <TableHead className="text-black">Site Name</TableHead>
-                  <TableHead className="text-black">Program</TableHead>
-                  <TableHead className="text-black">Sampling Status</TableHead>
-                  <TableHead className="text-black">
-                    Date Last Sampled
-                  </TableHead>
                   <TableHead className="text-black">Toxicologist</TableHead>
-                  <TableHead className="text-black">Project Manager</TableHead>
+                  <TableHead className="text-black">EQA</TableHead>
+                  <TableHead className="text-black">Program</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {data.map((item, index) => (
+                {data.rows.map((item, index) => (
                   <TableRow key={index}>
                     <TableCell>
                       <Sheet
-                        open={openAddress === item.sampled_address_clean}
+                        open={openAddress === item.street_address}
                         onOpenChange={(isOpen) => {
                           if (isOpen) {
-                            setOpenAddress(item.sampled_address_clean);
+                            setOpenAddress(item.street_address);
                           } else {
                             setOpenAddress(null);
                           }
@@ -116,17 +114,13 @@ export default function Addresses() {
                       >
                         <SheetTrigger
                           className="text-som-primary underline"
-                          onClick={() =>
-                            setOpenAddress(item.sampled_address_clean)
-                          }
+                          onClick={() => setOpenAddress(item.street_address)}
                         >
-                          {item.sampled_address_clean}
+                          {item.street_address}
                         </SheetTrigger>
                         <SheetContent>
                           <SheetHeader>
-                            <SheetTitle>
-                              {item.sampled_address_clean}
-                            </SheetTitle>
+                            <SheetTitle>{item.street_address}</SheetTitle>
                             <SheetDescription>
                               <p>
                                 Site Name:{" "}
@@ -147,11 +141,11 @@ export default function Addresses() {
                       </Sheet>
                     </TableCell>
                     <TableCell>{item.site_name}</TableCell>
-                    <TableCell>{item.sampling_type}</TableCell>
-                    <TableCell>{item.sampling_status}</TableCell>
-                    <TableCell>{item.date_last_sampled}</TableCell>
                     <TableCell>{item.toxicologist}</TableCell>
-                    <TableCell>{item.project_manager}</TableCell>
+                    <TableCell>{item.eqa}</TableCell>
+                    <TableCell>
+                      <ProgramsList programs={item.programs} />
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
