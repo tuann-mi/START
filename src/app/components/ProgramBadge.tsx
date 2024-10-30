@@ -1,3 +1,4 @@
+import Link from "next/link";
 const COLORS = [
   "bg-blue-100 text-blue-800",
   "bg-green-100 text-green-800",
@@ -8,9 +9,13 @@ const COLORS = [
   "bg-indigo-100 text-indigo-800",
   "bg-pink-100 text-pink-800",
   "bg-teal-100 text-teal-800",
+  "bg-emerald-100 text-emerald-800",
+  "bg-cyan-100 text-cyan-800",
+  "bg-sky-100 text-sky-800",
+  "bg-rose-100 text-rose-800",
 ];
 
-function getColorForProgram(programName) {
+function getColorForProgram(programName: string) {
   const hash = programName
     .split("")
     .reduce((acc, char) => acc + char.charCodeAt(0), 0);
@@ -35,10 +40,11 @@ export function ProgramBadge({ program }) {
   const colorClass = getColorForProgram(program);
 
   return (
-    <span
-      className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${colorClass} mr-1 mb-1`}
+    <Link
+      href={`/dashboard/programs?programName=${encodeURIComponent(program)}`}
+      className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${colorClass} mr-1 mb-1 hover:underline`}
     >
       {program}
-    </span>
+    </Link>
   );
 }
