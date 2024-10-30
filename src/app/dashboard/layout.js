@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { Suspense } from "react";
 import { usePathname } from "next/navigation";
 import Sidebar from "../components/Sidebar.js";
 import {
@@ -62,5 +62,9 @@ function DashboardContent({ children }) {
 }
 
 export default function DashboardLayout({ children }) {
-  return <DashboardContent>{children}</DashboardContent>;
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <DashboardContent>{children}</DashboardContent>
+    </Suspense>
+  );
 }
