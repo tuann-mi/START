@@ -3,6 +3,7 @@
 import React, { Suspense } from "react";
 import { usePathname } from "next/navigation";
 import Sidebar from "../components/Sidebar.js";
+import PageHeader from "../components/PageHeader.js";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -47,6 +48,10 @@ function DynamicBreadcrumb() {
 }
 
 function DashboardContent({ children }) {
+  const pathname = usePathname();
+  const pagename = String(pathname.split("/").at(-1));
+  const formattedPageName =
+    pagename.charAt(0).toUpperCase() + pagename.slice(1);
   return (
     <div
       id="dashboard-page-container"
@@ -55,6 +60,7 @@ function DashboardContent({ children }) {
       <Sidebar />
       <div id="dashboard-content-container" className="flex-grow p-6 w-96">
         <DynamicBreadcrumb />
+        <PageHeader title={formattedPageName} />
         {children}
       </div>
     </div>
