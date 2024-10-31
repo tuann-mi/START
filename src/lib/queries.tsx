@@ -1,9 +1,15 @@
 import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
 
 async function fetchAPI(endpoint: string) {
-  //   const response = await fetch(`/api/db-queries/${endpoint}`);
   const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
-  const response = await fetch(`${baseUrl}/api/${endpoint}`);
+  const response = await fetch(`${baseUrl}/api/${endpoint}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "include",
+    mode: "cors",
+  });
   if (!response.ok) {
     throw new Error("Network response was not ok");
   }

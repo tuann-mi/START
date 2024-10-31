@@ -1,7 +1,32 @@
 import { getDbClient } from "@/lib/db/client";
 import type { NextApiRequest, NextApiResponse } from "next";
+import cors from "cors";
 
-export default async function handler(_req: NextApiRequest, res: NextApiResponse) {
+function initMiddleware(middleware) {
+  return (req, res) =>
+    new Promise((resolve, reject) => {
+      middleware(req, res, (result) => {
+        if (result instanceof Error) {
+          return reject(result);
+        }
+        return resolve(result);
+      });
+    });
+}
+
+const corsMiddleware = initMiddleware(
+  cors({
+    origin: [
+      "https://start-prod.vercel.app",
+      "https://start-git-db-query-rewrite-tuan-nguyens-projects-5f98c417.vercel.app",
+      process.env.NEXT_PUBLIC_API_URL,
+    ],
+    methods: ["GET", "POST", "OPTIONS"],
+  }),
+);
+
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  await corsMiddleware(req, res);
   const client = getDbClient();
   try {
     console.log("Connecting to the database...", new Date().toLocaleTimeString());
