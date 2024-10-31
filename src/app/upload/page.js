@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useSession, signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import Button from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 
 export default function Upload() {
   const router = useRouter();
@@ -106,12 +106,8 @@ export default function Upload() {
 
   return (
     <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-      <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">
-        Upload File
-      </h1>
-      <p className="mb-4 text-gray-600 dark:text-gray-300">
-        Upload MCLs, SSWBs, and other documents.
-      </p>
+      <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">Upload File</h1>
+      <p className="mb-4 text-gray-600 dark:text-gray-300">Upload MCLs, SSWBs, and other documents.</p>
       <form onSubmit={handleSubmit} className="space-y-4">
         <input
           type="file"
@@ -120,17 +116,10 @@ export default function Upload() {
         />
         <Button type="submit" text="Upload" />
       </form>
-      {message && (
-        <p className="mt-4 text-gray-900 dark:text-white">{message}</p>
-      )}
+      {message && <p className="mt-4 text-gray-900 dark:text-white">{message}</p>}
       <div className="mt-12">
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">
-          Address Cleansing Testing
-        </h1>
-        <form
-          onSubmit={handleAddressSubmit}
-          className="space-y-4 flex flex-col"
-        >
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">Address Cleansing Testing</h1>
+        <form onSubmit={handleAddressSubmit} className="space-y-4 flex flex-col">
           <div className="flex flex-row w-full justify-between items-center">
             <input
               type="text"
@@ -194,9 +183,7 @@ export default function Upload() {
         )}
 
         <div className="mt-12">
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">
-            Bulk Address Cleansing Testing
-          </h1>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">Bulk Address Cleansing Testing</h1>
           <textarea className="w-full text-sm text-gray-900 dark:text-gray-300 min-h-40 p-2 shadow-lg" />
           <Button type="submit" text="Cleanse" />
         </div>

@@ -1,19 +1,19 @@
-import { useState } from 'react';
-import Button from './Button';
+import { useState } from "react";
+import { Button } from "./button";
 
 export default function EventForm({ onSubmit }) {
-  const [title, setTitle] = useState('');
-  const [date, setDate] = useState('');
-  const [time, setTime] = useState('');
-  const [participants, setParticipants] = useState('');
+  const [title, setTitle] = useState("");
+  const [date, setDate] = useState("");
+  const [time, setTime] = useState("");
+  const [participants, setParticipants] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit({ title, date, time, participants: participants.split(',') });
-    setTitle('');
-    setDate('');
-    setTime('');
-    setParticipants('');
+    onSubmit({ title, date, time, participants: participants.split(",") });
+    setTitle("");
+    setDate("");
+    setTime("");
+    setParticipants("");
   };
 
   return (
@@ -50,7 +50,9 @@ export default function EventForm({ onSubmit }) {
         />
       </div>
       <div>
-        <label className="block text-sm font-medium text-gray-700 text-black dark:text-white mt-2">Participants (comma separated emails)</label>
+        <label className="block text-sm font-medium text-gray-700 text-black dark:text-white mt-2">
+          Participants (comma separated emails)
+        </label>
         <input
           type="text"
           value={participants}
@@ -59,11 +61,8 @@ export default function EventForm({ onSubmit }) {
           placeholder="bob@example.com, jane@example.com, john@example.com"
         />
       </div>
-      
-      <Button
-        text="Schedule Event"
-        type="submit"
-      />
+
+      <Button text="Schedule Event" type="submit" />
     </form>
   );
 }

@@ -9,6 +9,8 @@ import { ProgramsList } from "@/components/ui/ProgramBadge";
 import { useAddressOverview } from "@/lib/queries";
 import { ErrorBoundary } from "react-error-boundary";
 
+export const runtime = "edge";
+
 type Owner = {
   name: string;
   phone_number: string;
