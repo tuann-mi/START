@@ -33,7 +33,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
-import PageHeader from "../../components/PageHeader";
+import PageHeader from "@/components/ui/PageHeader";
 import { Skeleton } from "@/components/ui/skeleton";
 export default function Sites() {
   const [isLoading, setIsLoading] = useState(true);
@@ -119,7 +119,6 @@ export default function Sites() {
 
   return (
     <>
-      <PageHeader title="Sites" />
       <div className="flex flex-col justify-start rounded-md">
         <div className="mb-8 rounded-md bg-gray-100 dark:bg-gray-800 flex flex-col shadow-md p-4 w-full">
           {/* TODO: Add filter options, sorting options, pagination, and other sample data */}

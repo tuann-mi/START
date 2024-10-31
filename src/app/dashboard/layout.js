@@ -2,8 +2,8 @@
 
 import React, { Suspense } from "react";
 import { usePathname } from "next/navigation";
-import Sidebar from "../components/Sidebar.js";
-import PageHeader from "../components/PageHeader.js";
+import Sidebar from "@/components/ui/Sidebar";
+import PageHeader from "@/components/ui/PageHeader";
 import {
   Breadcrumb,
   BreadcrumbItem,
