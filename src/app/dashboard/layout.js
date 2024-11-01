@@ -1,6 +1,6 @@
 "use client";
 
-import React, { Suspense } from "react";
+import React from "react";
 import { usePathname } from "next/navigation";
 import Sidebar from "@/components/ui/sidebar";
 import { PageHeader } from "@/components/ui/headers";
@@ -67,9 +67,5 @@ function DashboardContent({ children }) {
 }
 
 export default function DashboardLayout({ children }) {
-  return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <DashboardContent>{children}</DashboardContent>
-    </Suspense>
-  );
+  return <DashboardContent>{children}</DashboardContent>;
 }

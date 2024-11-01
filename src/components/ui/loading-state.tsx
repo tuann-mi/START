@@ -19,6 +19,31 @@ export default function LoadingState({ type = "default" }) {
       </div>
     ),
     default: <Skeleton className="w-full h-[200px]" />,
+    page: (
+      <div className="flex flex-col justify-start rounded-md w-full p-8">
+        <div className="rounded-md bg-white shadow-md p-4 mb-4">
+          <Skeleton className="h-8 w-48 mb-4" />
+          <div className="flex flex-row items-center space-x-4">
+            <div className="flex-1">
+              <Skeleton className="h-32 w-full rounded-md" />
+            </div>
+            <div className="flex-1">
+              <Skeleton className="h-32 w-full rounded-md" />
+            </div>
+            <div className="flex-1">
+              <Skeleton className="h-32 w-full rounded-md" />
+            </div>
+            <div className="flex-1">
+              <Skeleton className="h-32 w-full rounded-md" />
+            </div>
+          </div>
+        </div>
+        <div className="rounded-md bg-white shadow-md p-4 mb-4">
+          <Skeleton className="h-8 w-48 mb-4" />
+          <Skeleton className="h-64 w-full" />
+        </div>
+      </div>
+    ),
   };
 
   return loadingStates[type] || loadingStates.default;
