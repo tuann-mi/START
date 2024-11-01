@@ -2,8 +2,8 @@
 
 import React, { Suspense } from "react";
 import { usePathname } from "next/navigation";
-import Sidebar from "@/components/ui/Sidebar";
-import PageHeader from "@/components/ui/PageHeader";
+import Sidebar from "@/components/ui/sidebar";
+import { PageHeader } from "@/components/ui/headers";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -50,8 +50,7 @@ function DynamicBreadcrumb() {
 function DashboardContent({ children }) {
   const pathname = usePathname();
   const pagename = String(pathname.split("/").at(-1));
-  const formattedPageName =
-    pagename.charAt(0).toUpperCase() + pagename.slice(1);
+  const formattedPageName = pagename.charAt(0).toUpperCase() + pagename.slice(1);
   return (
     <div
       id="dashboard-page-container"

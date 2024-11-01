@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useSession, signOut, signIn } from "next-auth/react";
-import { useTheme } from "./ThemeProvider";
+import { useTheme } from "@/app/providers";
 import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
 import { Switch } from "@/components/ui/switch";
@@ -78,10 +78,10 @@ export default function Navbar() {
                   className="hidden sm:flex items-center hover:bg-gray-100 dark:hover:bg-gray-700 p-2 rounded-md transition duration-200 min-h-3.5"
                 >
                   <span className="border-transparent text-gray-500 dark:text-gray-300 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium mx-2">
-                    {session.user.name}
+                    {session && session.user ? session.user.name : ""}
                   </span>
                   <Image
-                    src={session.user.image || "/default_pfp.png"} // CHANGE LATER
+                    src={session?.user?.image || "/default_pfp.png"} // CHANGE LATER
                     alt="User Profile"
                     className="w-8 h-8 rounded-full"
                     width={32}
@@ -126,13 +126,7 @@ export default function Navbar() {
             )}
 
             <div className="hidden sm:flex items-center ml-2">
-              <Switch
-                checked={theme === "dark"}
-                onCheckedChange={() => {
-                  toggleTheme();
-                  console.log("Theme set to: ", theme);
-                }}
-              />
+              <Switch checked={theme === "dark"} onCheckedChange={toggleTheme} />
               <span className="ml-2">{theme === "dark" ? "Dark Mode" : "Light Mode"}</span>
             </div>
             {/* <button
@@ -161,10 +155,7 @@ export default function Navbar() {
             {session ? (
               <>
                 <button
-                  onClick={() => {
-                    toggleTheme();
-                    console.log("Theme set to: ", theme);
-                  }}
+                  onClick={toggleTheme}
                   className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition duration-200"
                 >
                   {theme === "dark" ? "Set to light-mode" : "Set to dark-mode"}

@@ -5,7 +5,7 @@ import { Table, TableHeader, TableBody, TableRow, TableCell, TableHead } from "@
 import { Sheet, SheetTrigger, SheetContent, SheetHeader, SheetDescription, SheetTitle } from "@/components/ui/sheet";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { ProgramsList } from "@/components/ui/ProgramBadge";
+import { ProgramsList } from "@/components/ui/program-badge";
 import { useAddressOverview } from "@/lib/queries";
 import { ErrorBoundary } from "react-error-boundary";
 
@@ -78,7 +78,7 @@ export default function Addresses() {
                 </TableHeader>
                 <TableBody>
                   {addressOverviewData?.map((item, index) => (
-                    <TableRow key={index}>
+                    <TableRow key={index} className="h-36">
                       <TableCell>
                         <Sheet
                           open={openAddress === item.street_address}
@@ -98,7 +98,7 @@ export default function Addresses() {
                           </SheetTrigger>
                           <SheetContent>
                             <SheetHeader>
-                              <SheetTitle>{item.street_address}</SheetTitle>
+                              <SheetTitle className="text-2xl">{item.street_address}</SheetTitle>
                               <SheetDescription>
                                 <>
                                   City: {item.city}
@@ -120,8 +120,9 @@ export default function Addresses() {
                                 <br />
                                 <>EQA: {item.eqa}</>
                               </SheetDescription>
+                              <hr className="my-4 border-gray-300" />
                               <div id="owner-info">
-                                <h1>Owner Information</h1>
+                                <p className="text-lg">Owner Information</p>
                                 <Table>
                                   <TableHeader>
                                     <TableRow>
@@ -131,7 +132,7 @@ export default function Addresses() {
                                     </TableRow>
                                   </TableHeader>
                                   <TableBody>
-                                    {item.owners.map((owner, index) => (
+                                    {item.owners.map((owner: Owner, index) => (
                                       <TableRow key={index}>
                                         {ownerInfoTableColumns.map((column, index) => (
                                           <TableCell key={index}>{owner[column.key]}</TableCell>
@@ -141,27 +142,32 @@ export default function Addresses() {
                                   </TableBody>
                                 </Table>
                               </div>
-                              <div>
-                                <h1>Tenant Information</h1>
-                                <Table>
-                                  <TableHeader>
-                                    <TableRow>
-                                      {tenantInfoTableColumns.map((column, index) => (
-                                        <TableHead key={index}>{column.label}</TableHead>
-                                      ))}
-                                    </TableRow>
-                                  </TableHeader>
-                                  <TableBody>
-                                    {item.tenants.map((tenant, index) => (
-                                      <TableRow key={index}>
-                                        {tenantInfoTableColumns.map((column, index) => (
-                                          <TableCell key={index}>{tenant[column.key]}</TableCell>
+                              {item.tenants.some((tenant) => tenant.name) && (
+                                <>
+                                  <hr className="my-4 border-gray-300" />
+                                  <div id="tenant-info">
+                                    <p className="text-lg">Tenant Information</p>
+                                    <Table>
+                                      <TableHeader>
+                                        <TableRow>
+                                          {tenantInfoTableColumns.map((column, index) => (
+                                            <TableHead key={index}>{column.label}</TableHead>
+                                          ))}
+                                        </TableRow>
+                                      </TableHeader>
+                                      <TableBody>
+                                        {item.tenants.map((tenant: Tenant, index) => (
+                                          <TableRow key={index}>
+                                            {tenantInfoTableColumns.map((column, index) => (
+                                              <TableCell key={index}>{tenant[column.key]}</TableCell>
+                                            ))}
+                                          </TableRow>
                                         ))}
-                                      </TableRow>
-                                    ))}
-                                  </TableBody>
-                                </Table>
-                              </div>
+                                      </TableBody>
+                                    </Table>
+                                  </div>
+                                </>
+                              )}
                             </SheetHeader>
                           </SheetContent>
                         </Sheet>

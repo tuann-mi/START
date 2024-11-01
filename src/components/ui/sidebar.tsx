@@ -1,20 +1,9 @@
 import { useState, useEffect } from "react";
-import {
-  faChevronLeft,
-  faChevronRight,
-} from "@fortawesome/free-solid-svg-icons";
-import {
-  ChevronsUpDown,
-  Plus,
-  X,
-  Home,
-  MapPin,
-  Building2,
-  LayoutDashboard,
-  Leaf,
-} from "lucide-react";
+import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import { ChevronsUpDown, Plus, X, Home, MapPin, Building2, LayoutDashboard, Leaf } from "lucide-react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 export default function Sidebar() {
   const [isNotCollapsed, setIsNotCollapsed] = useState(true);
   const currentPath = usePathname();
@@ -25,10 +14,7 @@ export default function Sidebar() {
     Addresses: Home,
     Programs: Leaf,
   };
-  const sortedOptions = [
-    "Dashboard",
-    ...sidebarOptions.filter((option) => option !== "Dashboard").sort(),
-  ];
+  const sortedOptions = ["Dashboard", ...sidebarOptions.filter((option) => option !== "Dashboard").sort()];
   useEffect(() => {
     if (typeof window !== "undefined") {
       setIsNotCollapsed(window.innerWidth > 768);
@@ -44,34 +30,20 @@ export default function Sidebar() {
         isNotCollapsed ? "w-56" : "w-16"
       } transition-all duration-500 z-40 flex flex-col flex-shrink-0`}
     >
-      <div
-        className={`flex ${isNotCollapsed ? "justify-end" : "justify-center"}`}
-      >
-        <button
-          onClick={toggleSidebar}
-          className={`w-12 h-12 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700`}
-        >
-          <FontAwesomeIcon
-            icon={isNotCollapsed ? faChevronLeft : faChevronRight}
-          />
+      <div className={`flex ${isNotCollapsed ? "justify-end" : "justify-center"}`}>
+        <button onClick={toggleSidebar} className={`w-12 h-12 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700`}>
+          <FontAwesomeIcon icon={isNotCollapsed ? faChevronLeft : faChevronRight} />
         </button>
       </div>
       <div id="search" className={`${isNotCollapsed ? "block" : "hidden"} p-2`}>
         <form>
-          <input
-            type="text"
-            placeholder="Search"
-            className="w-full p-2 rounded-md"
-          />
+          <input type="text" placeholder="Search" className="w-full p-2 rounded-md" />
         </form>
       </div>
       <div>
         <ul className={`${isNotCollapsed ? "mx-2" : ""}`}>
           {sortedOptions.map((option) => {
-            const optionPath =
-              option === "Dashboard"
-                ? "/dashboard"
-                : `/dashboard/${option.toLowerCase()}`;
+            const optionPath = option === "Dashboard" ? "/dashboard" : `/dashboard/${option.toLowerCase()}`;
             const isActive = currentPath === optionPath;
             const IconComponent = iconMap[option];
             return (
@@ -86,12 +58,8 @@ export default function Sidebar() {
                       : "hover:bg-gray-200 dark:hover:bg-gray-700 hover:underline"
                   }`}
                 >
-                  <IconComponent
-                    className={`${
-                      isNotCollapsed ? "mr-2" : "my-2 flex-shrink-0"
-                    }`}
-                  />
-                  {isNotCollapsed && <p href={optionPath}>{option}</p>}
+                  <IconComponent className={`${isNotCollapsed ? "mr-2" : "my-2 flex-shrink-0"}`} />
+                  {isNotCollapsed && <>{option}</>}
                 </a>
               </li>
             );

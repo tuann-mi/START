@@ -2,14 +2,15 @@
 
 import { useSession, signIn } from "next-auth/react";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-
+import { SectionHeader } from "@/components/ui/headers";
+import { SectionContainer } from "@/components/ui/content-containers";
 export default function Dashboard() {
   const { data: session, status } = useSession();
 
   return (
     <>
-      <div id="overview-container" className="rounded-md p-4 bg-gray-100 dark:bg-gray-800 flex flex-col shadow-md">
-        <h1 className="text-xl mb-4 text-gray-900 dark:text-white font-bold">Overview</h1>
+      <SectionContainer>
+        <SectionHeader title="Overview" />
         <div
           id="overview-cards-container"
           className="flex flex-row items-center rounded-md space-x-4 overflow-x-auto pb-4 justify-evenly"
@@ -56,7 +57,7 @@ export default function Dashboard() {
             </Table>
           </div>
         </div>
-      </div>
+      </SectionContainer>
     </>
   );
 }
