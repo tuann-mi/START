@@ -1,8 +1,13 @@
-import NextAuth from 'next-auth';
-import GoogleProvider from 'next-auth/providers/google';
+import NextAuth from "next-auth";
+import GoogleProvider from "next-auth/providers/google";
+import CredentialsProvider from "next-auth/providers/credentials";
+import { verifyCredentials } from "@/lib/auth/credentials";
+import { authConfig } from "@/lib/auth/flags";
 
-export default NextAuth({
-  providers: [
+const providers = [];
+
+if (authConfig.mode === "all" || authConfig.mode === "google") {
+  providers.push(
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
@@ -10,21 +15,50 @@ export default NextAuth({
         params: {
           prompt: "consent",
           access_type: "offline",
-          response_type: "code"
-        }
-      }
+          response_type: "code",
+        },
+      },
     }),
-  ],
+  );
+}
+
+if (authConfig.mode === "all" || authConfig.mode === "credentials") {
+  providers.push(
+    CredentialsProvider({
+      name: "Credentials",
+      credentials: {
+        username: { label: "Username", type: "text" },
+        password: { label: "Password", type: "password" },
+      },
+      async authorize(credentials) {
+        if (!credentials) return null;
+
+        const user = await verifyCredentials({
+          username: credentials.username,
+          password: credentials.password,
+        });
+
+        return user;
+      },
+    }),
+  );
+}
+
+export default NextAuth({
+  providers,
   secret: process.env.NEXTAUTH_SECRET,
   pages: {
-    signIn: '/login',
+    signIn: "/login",
   },
   callbacks: {
-    async signIn({ account, profile }) {
-      if (account.provider === "google") {
-        return profile.email_verified && profile.email.endsWith("@gmail.com")
+    async signIn({ account, profile, credentials }) {
+      if (credentials) {
+        return true; // Credentials were already verified in authorize()
       }
-      return true
+      if (account?.provider === "google") {
+        return profile.email_verified && profile.email.endsWith("@gmail.com");
+      }
+      return false;
     },
-  }
+  },
 });
