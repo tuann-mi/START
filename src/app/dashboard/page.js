@@ -2,9 +2,12 @@
 
 import { useEffect, useState, useRef } from "react";
 import { Bar, Doughnut, Line } from "react-chartjs-2";
+import { Chart as ChartJS } from "chart.js/auto";
 import { SectionHeader } from "@/components/ui/headers";
 import { SectionContainer } from "@/components/ui/content-containers";
 import { useDashboardStats } from "@/lib/queries";
+
+export const runtime = "edge";
 
 export default function Dashboard() {
   const [filters, setFilters] = useState({});
