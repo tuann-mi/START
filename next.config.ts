@@ -3,6 +3,11 @@ import dotenv from "dotenv";
 const env = process.env.NODE_ENV;
 dotenv.config({ path: `.env.${env}` });
 
+const withBundleAnalyzer = require("@next/bundle-analyzer")({
+  enabled: process.env.ANALYZE === "true",
+});
+module.exports = withBundleAnalyzer({});
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: "standalone",
