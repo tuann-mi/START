@@ -9,10 +9,10 @@ import { SessionProvider } from "next-auth/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function RootLayout({ session, children }) {
+export default function RootLayout({ children }) {
   console.log(process.env.NODE_ENV);
   return (
-    <SessionProvider session={session}>
+    <SessionProvider>
       <html lang="en" suppressHydrationWarning>
         <body
           className={`${inter.className} dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300 h-screen flex flex-col `}
