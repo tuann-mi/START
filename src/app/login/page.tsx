@@ -2,13 +2,14 @@
 
 import { signIn, useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { authConfig } from "@/lib/auth/flags";
 import { PageHeader } from "@/components/ui/headers";
 
 export default function Login() {
   const { data: session, status } = useSession();
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [credentials, setCredentials] = useState({ username: "", password: "" });
   const [error, setError] = useState("");
 
@@ -17,6 +18,7 @@ export default function Login() {
     setError("");
 
     try {
+      const callbackUrl = searchParams?.get("callbackUrl") || "/";
       const result = await signIn("credentials", {
         username: credentials.username,
         password: credentials.password,
@@ -28,7 +30,7 @@ export default function Login() {
         return;
       }
 
-      router.push("/dashboard");
+      router.push(callbackUrl);
     } catch (error) {
       setError("An error occurred during login");
     }

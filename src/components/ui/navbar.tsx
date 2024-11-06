@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import Link from "next/link";
 import { useSession, signOut, signIn } from "next-auth/react";
@@ -5,10 +7,9 @@ import { useTheme } from "@/app/providers";
 import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
 import { Switch } from "@/components/ui/switch";
-
 export default function Navbar() {
   const router = useRouter();
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
   const { theme, toggleTheme } = useTheme();
   const pathname = usePathname();
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -23,10 +24,12 @@ export default function Navbar() {
 
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
+    console.log("session", session);
   };
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
+    console.log("session", session);
   };
 
   return (
@@ -129,12 +132,6 @@ export default function Navbar() {
               <Switch checked={theme === "dark"} onCheckedChange={toggleTheme} />
               <span className="ml-2">{theme === "dark" ? "Dark Mode" : "Light Mode"}</span>
             </div>
-            {/* <button
-              onClick={() => {toggleTheme(); console.log("Theme set to: ", theme);}}
-              className="hidden sm:block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition duration-200"
-            >
-              {theme === 'dark' ? 'Set to light-mode' : 'Set to dark-mode'}
-            </button> */}
           </div>
         </div>
       </div>
@@ -174,12 +171,15 @@ export default function Navbar() {
                 </button>
               </>
             ) : (
-              <button
-                onClick={() => signIn("google", { callbackUrl: "/" })}
-                className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition duration-200"
-              >
-                Login
-              </button>
+              // <button
+              //   onClick={() => signIn("google", { callbackUrl: "/" })}
+              //   className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition duration-200"
+              // >
+              //   Login
+              // </button>
+              <>
+                <div></div>
+              </>
             )}
           </div>
         </div>

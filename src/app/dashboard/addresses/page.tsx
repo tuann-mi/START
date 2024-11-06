@@ -8,28 +8,9 @@ import { useSearchParams } from "next/navigation";
 import { ProgramsList } from "@/components/ui/program-badge";
 import { useAddressOverview } from "@/lib/queries";
 import { ErrorBoundary } from "react-error-boundary";
+import { Owner, Tenant } from "@/lib/types";
 
 export const runtime = "edge";
-
-type Owner = {
-  name: string;
-  phone_number: string;
-  email: string;
-  mailing_address: string;
-  mailing_city: string;
-  mailing_state: string;
-  mailing_zipcode: string;
-};
-
-type Tenant = {
-  name: string;
-  phone_number: string;
-  email: string;
-  mailing_address: string;
-  mailing_city: string;
-  mailing_state: string;
-  mailing_zipcode: string;
-};
 
 export default function Addresses() {
   const { data: addressOverviewData } = useAddressOverview();

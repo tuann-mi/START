@@ -1,4 +1,4 @@
-import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
+import { useSuspenseQuery } from "@tanstack/react-query";
 
 async function fetchAPI(endpoint: string) {
   const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
@@ -48,5 +48,12 @@ export function useSamplingRoundStatus() {
   return useSuspenseQuery({
     queryKey: ["samplingStatus"],
     queryFn: () => fetchAPI("sampling-round-status"),
+  });
+}
+
+export function useDashboardStats() {
+  return useSuspenseQuery({
+    queryKey: ["dashboardStats"],
+    queryFn: () => fetchAPI("dashboard-stats"),
   });
 }

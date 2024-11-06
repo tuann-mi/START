@@ -8,8 +8,8 @@ interface AuthConfig {
 
 export const authConfig: AuthConfig = {
   mode: (process.env.NEXT_PUBLIC_AUTH_MODE as AuthMode) || "all",
-  protectedPaths: ["/dashboard", "/calendar", "/upload", "/profile"],
-  publicPaths: ["/", "/login", "/api/auth"],
+  protectedPaths: ["/", "/dashboard", "/calendar", "/upload", "/profile"],
+  publicPaths: ["/login", "/api/auth"],
 };
 
 export function isProtectedPath(path: string): boolean {

@@ -9,7 +9,7 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  const token = request.cookies.get("next-auth.session-token");
+  const token = request.cookies.get("authjs.session-token");
 
   if (!token) {
     const url = new URL("/login", request.url);
@@ -21,5 +21,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: "/((?!api/auth|_next/static|_next/image|favicon.ico).*)",
+  matcher: "/((?!api/auth|_next/static|_next/image|images|favicon.ico).*)",
 };

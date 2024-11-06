@@ -1,12 +1,8 @@
 import { getUserByUsername } from "@/lib/auth/users";
 import bcrypt from "bcrypt";
+import { UserCredentials } from "@/lib/types";
 
-export type UserCredentials = {
-  username: string;
-  password: string;
-};
-
-export async function verifyCredentials(credentials: UserCredentials) {
+export default async function verifyCredentials(credentials: UserCredentials) {
   try {
     const user = await getUserByUsername(credentials.username);
     console.log("User found:", user ? "yes" : "no");
@@ -31,7 +27,7 @@ export async function verifyCredentials(credentials: UserCredentials) {
       id: user.id.toString(),
       name: `${user.first_name} ${user.last_name}`,
       email: user.email,
-      role: user.user_group,
+      user_group: user.user_group,
     };
   } catch (error) {
     console.error("Error in verifyCredentials:", error);

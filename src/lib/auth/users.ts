@@ -1,15 +1,5 @@
 import { getDbClient } from "@/lib/db/client";
-
-export interface User {
-  id: number;
-  user_group: string;
-  first_name: string;
-  last_name: string;
-  is_active: boolean;
-  username: string;
-  email: string;
-  password: string;
-}
+import { User } from "@/lib/types";
 
 export async function getUserByUsername(username: string): Promise<User | null> {
   const client = getDbClient();
@@ -17,7 +7,7 @@ export async function getUserByUsername(username: string): Promise<User | null> 
   try {
     await client.connect();
     const result = await client.query(`SELECT * FROM "user" WHERE username = $1`, [username]);
-
+    console.log("User found:", result.rows[0]);
     return result.rows[0] || null;
   } catch (error) {
     console.error("Error fetching user:", error);
