@@ -6,6 +6,8 @@ import { Chart as ChartJS } from "chart.js/auto";
 import { SectionHeader } from "@/components/ui/headers";
 import { SectionContainer } from "@/components/ui/content-containers";
 import { useDashboardStats } from "@/lib/queries";
+import { Button } from "@/components/ui/button";
+import { FilterIcon } from "lucide-react";
 
 export const runtime = "edge";
 
@@ -34,20 +36,21 @@ export default function Dashboard() {
     let filteredStats = { ...stats };
 
     if (filters.program) {
-      const programIndex = stats.sitesByProgram.labels.indexOf(filters.program);
+      const programIndex = stats.addressesByProgram.labels.indexOf(filters.program);
       filteredStats = {
         ...filteredStats,
         overview: {
           ...stats.overview,
-          totalSites: stats.sitesByProgram.data[programIndex],
+          totalAddresses: stats.addressesByProgram.data[programIndex],
         },
         analyteDistribution: {
           labels: stats.analyteDistribution.labels.filter(
             (_, i) =>
-              stats.analyteDistribution.data[i] > 0 && stats.sitesByProgram.labels[programIndex] === filters.program,
+              stats.analyteDistribution.data[i] > 0 &&
+              stats.addressesByProgram.labels[programIndex] === filters.program,
           ),
           data: stats.analyteDistribution.data.filter(
-            (val, i) => val > 0 && stats.sitesByProgram.labels[programIndex] === filters.program,
+            (val, i) => val > 0 && stats.addressesByProgram.labels[programIndex] === filters.program,
           ),
         },
       };
@@ -83,8 +86,16 @@ export default function Dashboard() {
   return (
     <>
       <SectionContainer>
-        <SectionHeader title="Overview" />
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        <div className="flex flex-row justify-between items-center mb-4">
+          <SectionHeader title="Overview" className="mb-0" />
+
+          <Button variant="secondary" className="flex flex-row items-center">
+            <FilterIcon className="w-4 h-4 mr-2" />
+            Filters
+          </Button>
+        </div>
+
+        <div id="cards-container" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
           <div className="bg-white p-4 rounded-lg shadow-md">
             <h3 className="text-gray-500 text-sm font-medium">Total Sites</h3>
             <p className="text-2xl font-bold">{stats.overview.totalSites}</p>
@@ -103,17 +114,17 @@ export default function Dashboard() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* Sites by Program */}
+        <div id="charts-container" className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {/* Addresses by Program */}
           <div className="bg-white p-4 rounded-lg shadow-md">
-            <h3 className="text-lg font-semibold mb-4">Sites by Program</h3>
+            <h3 className="text-lg font-semibold mb-4">Count of Addresses by Program</h3>
             <div className="h-[300px]">
               <Bar
                 data={{
-                  labels: stats.sitesByProgram.labels,
+                  labels: stats.addressesByProgram.labels,
                   datasets: [
                     {
-                      data: stats.sitesByProgram.data,
+                      data: stats.addressesByProgram.data,
                       backgroundColor: ["#1e7a87", "#0876a7", "#287c78"],
                     },
                   ],
@@ -122,7 +133,7 @@ export default function Dashboard() {
                   responsive: true,
                   maintainAspectRatio: false,
                   onClick: (event, elements) =>
-                    handleChartClick({ id: "program", data: stats.sitesByProgram }, elements),
+                    handleChartClick({ id: "program", data: stats.addressesByProgram }, elements),
                   plugins: {
                     legend: { display: false },
                   },

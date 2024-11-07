@@ -41,18 +41,18 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         (SELECT COUNT(DISTINCT program_id) FROM address_program) as "activePrograms",
         
         (SELECT json_build_object(
-          'labels', ARRAY['PFAS', 'Other Programs'],
-          'data', ARRAY[
-            (SELECT COUNT(DISTINCT ap.address_id) 
-            FROM address_program ap
-            JOIN program p ON p.id = ap.program_id
-            WHERE p.program_name LIKE '%PFAS%'),
-            (SELECT COUNT(DISTINCT ap.address_id)
-            FROM address_program ap
-            JOIN program p ON p.id = ap.program_id
-            WHERE p.program_name NOT LIKE '%PFAS%')
-          ]
-        )) as "sitesByProgram",
+          'labels', ARRAY_AGG(program_name ORDER BY address_count DESC),
+          'data', ARRAY_AGG(address_count ORDER BY address_count DESC)
+        ) FROM (
+          SELECT 
+            p.program_name,
+            COUNT(DISTINCT ap.address_id) as address_count
+          FROM address_program ap
+          JOIN program p ON p.id = ap.program_id
+          GROUP BY p.program_name
+          ORDER BY address_count DESC
+          LIMIT 5
+        ) top_programs) as "addressesByProgram",
         
         (SELECT json_build_object(
           'labels', ARRAY_AGG(month_name),
@@ -89,7 +89,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         totalSamples: result.rows[0].totalSamples,
         activePrograms: result.rows[0].activePrograms,
       },
-      sitesByProgram: result.rows[0].sitesByProgram,
+      addressesByProgram: result.rows[0].addressesByProgram,
       samplesByMonth: result.rows[0].samplesByMonth,
       analyteDistribution: result.rows[0].analyteDistribution,
     };
