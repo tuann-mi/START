@@ -1,13 +1,12 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useState } from "react";
 import { Bar, Doughnut, Line } from "react-chartjs-2";
 import { Chart as ChartJS } from "chart.js/auto";
 import { SectionHeader } from "@/components/ui/headers";
 import { SectionContainer } from "@/components/ui/content-containers";
 import { useDashboardStats } from "@/lib/queries";
-import { Button } from "@/components/ui/button";
-import { FilterIcon } from "lucide-react";
+import FilterDropdown from "@/components/ui/filter-dropdown-menu";
 
 export const runtime = "edge";
 
@@ -89,10 +88,14 @@ export default function Dashboard() {
         <div className="flex flex-row justify-between items-center mb-4">
           <SectionHeader title="Overview" className="mb-0" />
 
-          <Button variant="secondary" className="flex flex-row items-center">
+          {/* <Button
+            variant="secondary"
+            className="flex flex-row items-center bg-som-primary text-white hover:underline hover:bg-som-primary"
+          >
             <FilterIcon className="w-4 h-4 mr-2" />
             Filters
-          </Button>
+          </Button> */}
+          <FilterDropdown />
         </div>
 
         <div id="cards-container" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
