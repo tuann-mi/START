@@ -2,18 +2,34 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 
 async function fetchAPI(endpoint: string) {
   const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
-  const response = await fetch(`${baseUrl}/api/${endpoint}`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    credentials: "include",
-    mode: "cors",
-  });
-  if (!response.ok) {
-    throw new Error("Network response was not ok");
+  try {
+    const response = await fetch(`${baseUrl}/api/${endpoint}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      mode: "cors",
+    });
+    if (!response.ok) {
+      if (response.status === 401 || response.status === 403) {
+        window.location.href = "/login";
+        throw new Error("Unauthorized");
+      }
+      const errorText = await response.text();
+      console.error("API Error Response:", errorText);
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const contentType = response.headers.get("content-type");
+    console.log("Content Type:", contentType);
+    if (!contentType || !contentType.includes("application/json")) {
+      throw new TypeError("Response was not JSON");
+    }
+    return response.json();
+  } catch (error) {
+    console.error("API Error:", error);
+    throw error;
   }
-  return response.json();
 }
 
 export function useAddressOverview() {

@@ -55,16 +55,19 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         ) top_programs) as "addressesByProgram",
         
         (SELECT json_build_object(
-          'labels', ARRAY_AGG(month_name),
-          'data', ARRAY_AGG(sample_count)
+          'labels', ARRAY['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+          'data', ARRAY_AGG(COALESCE(sample_count, 0) ORDER BY month_number),
+          'years', (SELECT ARRAY_AGG(DISTINCT EXTRACT(YEAR FROM sample_date) ORDER BY EXTRACT(YEAR FROM sample_date)) FROM site_data)
         ) FROM (
           SELECT 
-            TO_CHAR(sample_date, 'Mon') as month_name,
-            COUNT(*) as sample_count
-          FROM site_data
-          GROUP BY TO_CHAR(sample_date, 'Mon'), DATE_TRUNC('month', sample_date)
-          ORDER BY DATE_TRUNC('month', sample_date) DESC
-          LIMIT 3
+            m.month_number,
+            COUNT(sd.sample_date) as sample_count
+          FROM (
+            SELECT generate_series(1,12) as month_number
+          ) m 
+          LEFT JOIN site_data sd ON EXTRACT(MONTH FROM sd.sample_date) = m.month_number
+          GROUP BY m.month_number
+          ORDER BY m.month_number
         ) months) as "samplesByMonth",
         
         (SELECT json_build_object(
@@ -97,5 +100,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     res.status(200).json(stats);
   } catch (error) {
     res.status(500).json({ error: "Failed to fetch dashboard data" });
+  } finally {
+    await client.end();
+    console.log("Disconnected from the database.", new Date().toLocaleTimeString());
   }
 }

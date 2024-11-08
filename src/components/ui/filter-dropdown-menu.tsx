@@ -8,139 +8,98 @@ import {
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { FilterIcon } from "lucide-react";
 import { useState } from "react";
-import { months, years, programs } from "@/lib/constants";
 
-export default function FilterDropdown() {
+interface FilterSection {
+  id: string;
+  title: string;
+  options: string[];
+}
+
+interface FilterDropdownProps {
+  sections: FilterSection[];
+  onFilterChange?: (sectionId: string, selectedItems: string[]) => void;
+  triggerIcon?: React.ReactNode;
+  triggerText?: string;
+  className?: string;
+}
+
+export default function FilterDropdown({
+  sections,
+  onFilterChange,
+  triggerIcon = <FilterIcon className="w-4 h-4 mr-2" />,
+  triggerText = "Filters",
+  className = "bg-som-primary text-white hover:underline",
+}: FilterDropdownProps) {
   const [open, setOpen] = useState(false);
-  const [selectedYears, setSelectedYears] = useState<string[]>([]);
-  const [selectedMonths, setSelectedMonths] = useState<string[]>([]);
-  const [selectedPrograms, setSelectedPrograms] = useState<string[]>([]);
-  const handleYearChange = (checked: boolean, year: string) => {
-    setSelectedYears((prev) => (checked ? [...prev, year] : prev.filter((item) => item !== year)));
+  const [selectedItems, setSelectedItems] = useState<Record<string, string[]>>({});
+  const handleItemChange = (sectionId: string, checked: boolean, item: string) => {
+    setSelectedItems((prev) => {
+      const newItems = checked ? [...(prev[sectionId] || []), item] : (prev[sectionId] || []).filter((i) => i !== item);
+
+      const updatedState = {
+        ...prev,
+        [sectionId]: newItems,
+      };
+
+      onFilterChange?.(sectionId, newItems);
+      return updatedState;
+    });
   };
 
-  const handleMonthChange = (checked: boolean, month: string) => {
-    setSelectedMonths((prev) => (checked ? [...prev, month] : prev.filter((item) => item !== month)));
-  };
+  const handleSelectAll = (sectionId: string, checked: boolean, options: string[]) => {
+    setSelectedItems((prev) => {
+      const updatedState = {
+        ...prev,
+        [sectionId]: checked ? [...options] : [],
+      };
 
-  const handleProgramChange = (checked: boolean, program: string) => {
-    setSelectedPrograms((prev) => (checked ? [...prev, program] : prev.filter((item) => item !== program)));
+      onFilterChange?.(sectionId, updatedState[sectionId]);
+      return updatedState;
+    });
   };
 
   return (
     <DropdownMenu open={open} onOpenChange={setOpen} modal={false}>
-      <DropdownMenuTrigger className="bg-som-primary text-white hover:underline flex flex-row items-center px-4 py-2 rounded-md">
-        <FilterIcon className="w-4 h-4 mr-2" />
-        Filters
+      <DropdownMenuTrigger className={`flex flex-row items-center px-4 py-2 rounded-md ${className}`}>
+        {triggerIcon}
+        {triggerText}
       </DropdownMenuTrigger>
       <DropdownMenuContent
-        className="max-h-[80vh] overflow-y-auto scrollbar-thin scrollbar-thumb-muted-foreground/30 scrollbar-track-transparent mr-8"
+        className="max-h-[80vh] overflow-y-auto scrollbar-thin scrollbar-thumb-muted-foreground/30 scrollbar-track-transparent mr-8 min-w-[200px]"
         sideOffset={6}
       >
         <DropdownMenuLabel>
-          <Accordion type="multiple" defaultValue={["year", "month", "program"]}>
-            <AccordionItem value="year">
-              <AccordionTrigger>Year</AccordionTrigger>
-              <AccordionContent>
-                <DropdownMenuCheckboxItem
-                  checked={selectedYears.length === years.length}
-                  onCheckedChange={(checked) => {
-                    if (checked) {
-                      setSelectedYears(years);
-                    } else {
-                      setSelectedYears([]);
-                    }
-                  }}
-                  onSelect={(event) => {
-                    event.preventDefault();
-                  }}
-                  className="w-full hover:cursor-pointer hover:bg-gray-100"
-                >
-                  Select All
-                </DropdownMenuCheckboxItem>
-                {years.map((year) => (
+          <Accordion type="multiple" defaultValue={sections.map((section) => section.id)}>
+            {sections.map((section) => (
+              <AccordionItem key={section.id} value={section.id}>
+                <AccordionTrigger>{section.title}</AccordionTrigger>
+                <AccordionContent>
                   <DropdownMenuCheckboxItem
-                    key={year}
-                    checked={selectedYears.includes(year)}
-                    onCheckedChange={(checked) => handleYearChange(checked, year)}
-                    onSelect={(event) => {
-                      event.preventDefault();
-                    }}
+                    checked={
+                      Array.isArray(section.options) &&
+                      section.options.length > 0 &&
+                      selectedItems[section.id]?.length === section.options.length
+                    }
+                    onCheckedChange={(checked) => handleSelectAll(section.id, checked, section.options)}
+                    onSelect={(event) => event.preventDefault()}
                     className="w-full hover:cursor-pointer hover:bg-gray-100"
                   >
-                    {year}
+                    Select All
                   </DropdownMenuCheckboxItem>
-                ))}
-              </AccordionContent>
-            </AccordionItem>
-            <AccordionItem value="month">
-              <AccordionTrigger>Month</AccordionTrigger>
-              <AccordionContent>
-                <DropdownMenuCheckboxItem
-                  checked={selectedMonths.length === months.length}
-                  onCheckedChange={(checked) => {
-                    if (checked) {
-                      setSelectedMonths(months);
-                    } else {
-                      setSelectedMonths([]);
-                    }
-                  }}
-                  onSelect={(event) => {
-                    event.preventDefault();
-                  }}
-                  className="w-full hover:cursor-pointer hover:bg-gray-100"
-                >
-                  Select All
-                </DropdownMenuCheckboxItem>
-                {months.map((month) => (
-                  <DropdownMenuCheckboxItem
-                    key={month}
-                    checked={selectedMonths.includes(month)}
-                    onCheckedChange={(checked) => handleMonthChange(checked, month)}
-                    onSelect={(event) => {
-                      event.preventDefault();
-                    }}
-                    className="w-full hover:cursor-pointer hover:bg-gray-100"
-                  >
-                    {month}
-                  </DropdownMenuCheckboxItem>
-                ))}
-              </AccordionContent>
-            </AccordionItem>
-            <AccordionItem value="program">
-              <AccordionTrigger>Program</AccordionTrigger>
-              <AccordionContent>
-                <DropdownMenuCheckboxItem
-                  checked={selectedPrograms.length === programs.length}
-                  onCheckedChange={(checked) => {
-                    if (checked) {
-                      setSelectedPrograms(programs);
-                    } else {
-                      setSelectedPrograms([]);
-                    }
-                  }}
-                  onSelect={(event) => {
-                    event.preventDefault();
-                  }}
-                  className="w-full hover:cursor-pointer hover:bg-gray-100"
-                >
-                  Select All
-                </DropdownMenuCheckboxItem>
-                {programs.map((program) => (
-                  <DropdownMenuCheckboxItem
-                    key={program}
-                    checked={selectedPrograms.includes(program)}
-                    onCheckedChange={(checked) => handleProgramChange(checked, program)}
-                    onSelect={(event) => {
-                      event.preventDefault();
-                    }}
-                    className="w-full hover:cursor-pointer hover:bg-gray-100"
-                  >
-                    {program}
-                  </DropdownMenuCheckboxItem>
-                ))}
-              </AccordionContent>
-            </AccordionItem>
+                  {section.options.map((option) => (
+                    <DropdownMenuCheckboxItem
+                      key={option}
+                      checked={selectedItems[section.id]?.includes(option)}
+                      onCheckedChange={(checked) => handleItemChange(section.id, checked, option)}
+                      onSelect={(event) => event.preventDefault()}
+                      className="w-full hover:cursor-pointer hover:bg-gray-100"
+                    >
+                      {option}
+                    </DropdownMenuCheckboxItem>
+                  ))}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
           </Accordion>
         </DropdownMenuLabel>
       </DropdownMenuContent>
