@@ -13,7 +13,6 @@ async function fetchAPI(endpoint: string) {
     });
     if (!response.ok) {
       if (response.status === 401 || response.status === 403) {
-        window.location.href = "/login";
         throw new Error(new Date().toLocaleTimeString() + " - queries.ts - Unauthorized");
       }
       const errorText = await response.text();
