@@ -19,20 +19,19 @@ export default function Dashboard() {
     {
       id: "year",
       title: "Year",
-      options: data.samplesByMonth.years.sort((a: number, b: number) => b - a),
+      options: data.samplesByMonth?.years.sort((a: number, b: number) => b - a) ?? [],
     },
     {
       id: "month",
       title: "Month",
-      options: data.samplesByMonth.labels,
+      options: data.samplesByMonth?.labels ?? [],
     },
     {
       id: "program",
       title: "Program",
-      options: data.addressesByProgram.labels,
+      options: data.addressesByProgram?.labels ?? [],
     },
   ];
-
   const colorMap = createColorMap(data.addressesByProgram.labels, graphColors);
   return (
     <div>

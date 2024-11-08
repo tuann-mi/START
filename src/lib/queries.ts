@@ -14,20 +14,20 @@ async function fetchAPI(endpoint: string) {
     if (!response.ok) {
       if (response.status === 401 || response.status === 403) {
         window.location.href = "/login";
-        throw new Error("Unauthorized");
+        throw new Error(new Date().toLocaleTimeString() + " - queries.ts - Unauthorized");
       }
       const errorText = await response.text();
-      console.error("API Error Response:", errorText);
+      console.error(new Date().toLocaleTimeString(), " - queries.ts - API Error Response:", errorText);
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const contentType = response.headers.get("content-type");
-    console.log("Fetch API, Content Type:", contentType);
+    console.log(new Date().toLocaleTimeString(), " - queries.ts - Content Type:", contentType);
     if (!contentType || !contentType.includes("application/json")) {
-      throw new TypeError("Response was not JSON");
+      throw new TypeError(new Date().toLocaleTimeString() + " - queries.ts - Response was not JSON");
     }
-    return response.json();
+    return await response.json();
   } catch (error) {
-    console.error("API Error:", error);
+    console.error(new Date().toLocaleTimeString(), " - queries.ts - API Error:", error);
     throw error;
   }
 }

@@ -30,9 +30,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const client = getDbClient();
 
   try {
-    console.log("Connecting to the database...", new Date().toLocaleTimeString());
+    console.log(new Date().toLocaleTimeString(), " - dashboard-stats.ts - Connecting to the database...");
     await client.connect();
-    console.log("Connected to the database.", new Date().toLocaleTimeString());
+    console.log(new Date().toLocaleTimeString(), " - dashboard-stats.ts - Connected to the database.");
     const result = await client.query(`
       SELECT 
         (SELECT COUNT(DISTINCT id) FROM site) as "totalSites",
@@ -96,12 +96,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       samplesByMonth: result.rows[0].samplesByMonth,
       analyteDistribution: result.rows[0].analyteDistribution,
     };
-    console.log(stats);
+
+    console.log(
+      new Date().toLocaleTimeString(),
+      " - dashboard-stats.ts - stats.analyteDistribution - ",
+      stats.analyteDistribution,
+    );
     res.status(200).json(stats);
   } catch (error) {
     res.status(500).json({ error: "Failed to fetch dashboard data" });
   } finally {
     await client.end();
-    console.log("Disconnected from the database.", new Date().toLocaleTimeString());
+    console.log(new Date().toLocaleTimeString(), " - dashboard-stats.ts - Disconnected from the database.");
   }
 }

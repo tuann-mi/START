@@ -47,7 +47,7 @@ export function ThemeProvider({ children }) {
 
 const queryCache = new QueryCache({
   onSettled: (data, error) => {
-    console.log("onSettled", data, error);
+    console.log(new Date().toLocaleTimeString(), " - providers.tsx - onSettled - data:", data, "error:", error);
   },
 });
 
@@ -57,7 +57,7 @@ export function QueryProvider({ children }) {
       new QueryClient({
         defaultOptions: {
           queries: {
-            staleTime: 5 * 60 * 1000,
+            staleTime: 10 * 60 * 1000,
             gcTime: 10 * 60 * 1000,
             refetchOnWindowFocus: false,
             refetchOnMount: false,

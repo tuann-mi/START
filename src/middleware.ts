@@ -12,11 +12,12 @@ export function middleware(request: NextRequest) {
   const token = request.cookies.get("authjs.session-token");
 
   if (!token) {
+    console.log(new Date().toLocaleTimeString(), " - middleware.ts - Unable to get token");
     const url = new URL("/login", request.url);
     url.searchParams.set("callbackUrl", pathname);
     return NextResponse.redirect(url);
   }
-
+  console.log(new Date().toLocaleTimeString(), " - middleware.ts - Got token");
   return NextResponse.next();
 }
 
