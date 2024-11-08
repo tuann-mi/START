@@ -21,7 +21,7 @@ async function fetchAPI(endpoint: string) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const contentType = response.headers.get("content-type");
-    console.log("Content Type:", contentType);
+    console.log("Fetch API, Content Type:", contentType);
     if (!contentType || !contentType.includes("application/json")) {
       throw new TypeError("Response was not JSON");
     }

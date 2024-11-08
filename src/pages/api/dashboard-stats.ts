@@ -19,7 +19,7 @@ const corsMiddleware = initMiddleware(
     origin: [
       "https://start-prod.vercel.app",
       "https://start-git-db-query-rewrite-tuan-nguyens-projects-5f98c417.vercel.app",
-      process.env.NEXT_PUBLIC_API_URL,
+      process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000",
     ],
     methods: ["GET", "POST", "OPTIONS"],
   }),
