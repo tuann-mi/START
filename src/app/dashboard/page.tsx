@@ -12,6 +12,8 @@ import { Chart, registerables } from "chart.js";
 import { randomIndex, createColorMap } from "@/lib/utils";
 Chart.register(...registerables);
 
+export const runtime = "edge";
+
 export default function Dashboard() {
   const { data } = useDashboardStats();
 
