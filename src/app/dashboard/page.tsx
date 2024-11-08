@@ -67,7 +67,7 @@ export default function Dashboard() {
                   legend: { display: false },
                 },
               }}
-              className="max-h-[600px]"
+              className="max-h-[300px] 2xl:max-h-[600px]"
             />
           </ChartContainer>
           <ChartContainer className="p-4">
@@ -90,7 +90,7 @@ export default function Dashboard() {
                   legend: { display: false },
                 },
               }}
-              className="max-h-[600px]"
+              className="max-h-[300px] 2xl:max-h-[600px]"
             />
           </ChartContainer>
         </ChartGrid>
