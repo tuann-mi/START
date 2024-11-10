@@ -1,9 +1,6 @@
 import { useState, useEffect } from "react";
-import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
-import { ChevronsUpDown, Plus, X, Home, MapPin, Building2, LayoutDashboard, Leaf } from "lucide-react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { ChevronLeft, ChevronRight, Home, MapPin, LayoutDashboard, Leaf } from "lucide-react";
 import { usePathname } from "next/navigation";
-import Link from "next/link";
 export default function Sidebar() {
   const [isNotCollapsed, setIsNotCollapsed] = useState(true);
   const currentPath = usePathname();
@@ -32,7 +29,7 @@ export default function Sidebar() {
     >
       <div className={`flex ${isNotCollapsed ? "justify-end" : "justify-center"}`}>
         <button onClick={toggleSidebar} className={`w-12 h-12 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700`}>
-          <FontAwesomeIcon icon={isNotCollapsed ? faChevronLeft : faChevronRight} />
+          {isNotCollapsed ? <ChevronLeft /> : <ChevronRight />}
         </button>
       </div>
       <div id="search" className={`${isNotCollapsed ? "block" : "hidden"} p-2`}>
