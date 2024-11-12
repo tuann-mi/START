@@ -7,6 +7,8 @@ import { useTheme } from "@/app/providers";
 import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
 import { Switch } from "@/components/ui/switch";
+import { capitalizeFirstLetter } from "@/lib/utils";
+
 export default function Navbar() {
   const router = useRouter();
   const { data: session } = useSession();
@@ -81,7 +83,7 @@ export default function Navbar() {
                   className="hidden sm:flex items-center hover:bg-gray-100 dark:hover:bg-gray-700 p-2 rounded-md transition duration-200 min-h-3.5"
                 >
                   <span className="border-transparent text-gray-500 dark:text-gray-300 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium mx-2">
-                    {session && session.user ? session.user.name : ""}
+                    {session && session.user ? capitalizeFirstLetter(session.user.name?.split(" ")[0]) : ""}
                   </span>
                   <Image
                     src={session?.user?.image || "/default_pfp.png"} // CHANGE LATER

@@ -1,4 +1,4 @@
-import { withPayload } from "@payloadcms/next/withPayload";
+// import { withPayload } from "@payloadcms/next/withPayload";
 import dotenv from "dotenv";
 import NextBundleAnalyzer from "@next/bundle-analyzer";
 const env = process.env.NODE_ENV;
@@ -47,4 +47,5 @@ const nextConfig = {
   },
 };
 
-export default withBundleAnalyzer(withPayload(nextConfig));
+export default withBundleAnalyzer(nextConfig);
+// export default withBundleAnalyzer(withPayload(nextConfig));
