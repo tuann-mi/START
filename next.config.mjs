@@ -1,12 +1,12 @@
+import { withPayload } from "@payloadcms/next/withPayload";
 import dotenv from "dotenv";
-
+import NextBundleAnalyzer from "@next/bundle-analyzer";
 const env = process.env.NODE_ENV;
 dotenv.config({ path: `.env.${env}` });
 
-const withBundleAnalyzer = require("@next/bundle-analyzer")({
+const withBundleAnalyzer = NextBundleAnalyzer({
   enabled: process.env.ANALYZE === "true",
 });
-module.exports = withBundleAnalyzer({});
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -47,4 +47,4 @@ const nextConfig = {
   },
 };
 
-export default nextConfig;
+export default withBundleAnalyzer(withPayload(nextConfig));
