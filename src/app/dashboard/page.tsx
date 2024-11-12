@@ -10,6 +10,7 @@ import { graphColors } from "@/lib/constants";
 import { Chart as ChartJS } from "chart.js/auto";
 import { Chart, registerables } from "chart.js";
 import { randomIndex, createColorMap } from "@/lib/utils";
+import { colorPalette } from "@/lib/constants";
 Chart.register(...registerables);
 
 export const runtime = "edge";
@@ -34,7 +35,7 @@ export default function Dashboard() {
       options: data.addressesByProgram?.labels ?? [],
     },
   ];
-  const colorMap = createColorMap(data.addressesByProgram.labels, graphColors);
+  const colorMap = createColorMap(data.addressesByProgram.labels, colorPalette.vibrant);
   return (
     <div>
       <SectionContainer>
@@ -57,7 +58,7 @@ export default function Dashboard() {
                 datasets: [
                   {
                     data: data.addressesByProgram.data,
-                    backgroundColor: Object.values(colorMap),
+                    backgroundColor: colorPalette.vibrant,
                   },
                 ],
               }}
@@ -79,7 +80,7 @@ export default function Dashboard() {
                 datasets: [
                   {
                     data: data.samplesByMonth.data,
-                    borderColor: graphColors[randomIndex(graphColors.length)],
+                    borderColor: colorPalette.vibrant[1],
                     tension: 0.4,
                   },
                 ],

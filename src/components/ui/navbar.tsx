@@ -80,9 +80,9 @@ export default function Navbar() {
               <>
                 <button
                   onClick={toggleDropdown}
-                  className="hidden sm:flex items-center hover:bg-gray-100 dark:hover:bg-gray-700 p-2 rounded-md transition duration-200 min-h-3.5"
+                  className="border-transparent border-transparent text-gray-500 dark:text-gray-300 hover:border-gray-300 hover:text-gray-700 dark:hover:text-gray-100 sm:flex h-full min-h-3.5 inline-flex items-center px-1 pt-1 border-b-2"
                 >
-                  <span className="border-transparent text-gray-500 dark:text-gray-300 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium mx-2">
+                  <span className="mx-2">
                     {session && session.user ? capitalizeFirstLetter(session.user.name?.split(" ")[0]) : ""}
                   </span>
                   <Image
@@ -94,7 +94,7 @@ export default function Navbar() {
                   />
                 </button>
                 {dropdownOpen && (
-                  <div className="mt-40 w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg z-10 absolute right-0">
+                  <div className="mt-36 w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg z-10 absolute right-10">
                     <Link
                       href="/profile"
                       className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 w-full text-left"

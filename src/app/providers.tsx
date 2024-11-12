@@ -47,7 +47,7 @@ export function ThemeProvider({ children }) {
 
 const queryCache = new QueryCache({
   onSettled: (data, error) => {
-    console.log(new Date().toLocaleTimeString(), " - providers.tsx - onSettled - data:", data, "error:", error);
+    console.log(new Date().toLocaleTimeString(), " - providers.tsx - onSettled - error ", error);
   },
 });
 
