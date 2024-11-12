@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ChevronLeft, ChevronRight, Home, MapPin, LayoutDashboard, Leaf } from "lucide-react";
+import { Home, MapPin, LayoutDashboard, Leaf, Menu } from "lucide-react";
 import { usePathname } from "next/navigation";
 export default function Sidebar() {
   const [isNotCollapsed, setIsNotCollapsed] = useState(true);
@@ -28,8 +28,11 @@ export default function Sidebar() {
       } transition-all duration-500 z-40 flex flex-col flex-shrink-0`}
     >
       <div className={`flex ${isNotCollapsed ? "justify-end" : "justify-center"}`}>
-        <button onClick={toggleSidebar} className={`w-12 h-12 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700`}>
-          {isNotCollapsed ? <ChevronLeft /> : <ChevronRight />}
+        <button
+          onClick={toggleSidebar}
+          className={`w-12 h-12 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 flex items-center justify-center`}
+        >
+          <Menu />
         </button>
       </div>
       <div id="search" className={`${isNotCollapsed ? "block" : "hidden"} p-2`}>
