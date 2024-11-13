@@ -125,7 +125,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             ad.programs,
             ad.address_id
         ORDER BY
-            ad.street_address;
+            ad.street_address
+        LIMIT 10;
     `);
 
     console.log("Full query executed successfully:", result.rows.slice(0, 3));

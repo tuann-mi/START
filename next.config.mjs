@@ -1,4 +1,3 @@
-// import { withPayload } from "@payloadcms/next/withPayload";
 import dotenv from "dotenv";
 import NextBundleAnalyzer from "@next/bundle-analyzer";
 const env = process.env.NODE_ENV;
@@ -10,6 +9,11 @@ const withBundleAnalyzer = NextBundleAnalyzer({
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  experimental: {
+    turbo: {
+      resolveExtensions: [".mdx", ".tsx", ".ts", ".jsx", ".js", ".mjs", ".json"],
+    },
+  },
   output: "standalone",
   poweredByHeader: false,
   generateEtags: false,
@@ -48,4 +52,3 @@ const nextConfig = {
 };
 
 export default withBundleAnalyzer(nextConfig);
-// export default withBundleAnalyzer(withPayload(nextConfig));

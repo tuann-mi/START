@@ -11,9 +11,16 @@ import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTr
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { useSearchParams } from "next/navigation";
+import { useSiteOverview } from "@/lib/queries";
+
+const placeholders = {
+  deh_contact: "TBD",
+  egle_contact: "TBD",
+  lhd_contact: "TBD",
+};
 
 export default function Sites() {
-  const [siteOverview, setSiteOverview] = useState([]);
+  const { data: siteOverview } = useSiteOverview();
   const [addressInfo, setAddressInfo] = useState([]);
   const searchParams = useSearchParams();
   const siteName = searchParams.get("siteName");
@@ -25,6 +32,9 @@ export default function Sites() {
     } else {
       setOpenSite(null); // Reset openSite if siteName is not present
     }
+    return () => {
+      setOpenSite(null);
+    };
   }, [siteName]);
 
   return (
@@ -36,9 +46,8 @@ export default function Sites() {
             <TableHeader>
               <TableRow>
                 <TableHead className="text-black">Site Name</TableHead>
-                <TableHead className="text-black">Sampling Type</TableHead>
                 <TableHead className="text-black">Toxicologist</TableHead>
-                <TableHead className="text-black">Project Manager</TableHead>
+                <TableHead className="text-black">EQA</TableHead>
                 <TableHead className="text-black">DEH Contact</TableHead>
                 <TableHead className="text-black">EGLE Contact</TableHead>
                 <TableHead className="text-black">LHD Contact</TableHead>
@@ -74,9 +83,11 @@ export default function Sites() {
                                 </SheetTitle>
                               </SheetHeader>
                               <SheetDescription>
-                                <p>Toxicologist: {site.toxicologist}</p>
-                                <p>Project Manager: {site.project_manager}</p>
-                                <p>Sampling Type: {site.sampling_type}</p>
+                                <>
+                                  Toxicologist: {site.toxicologist}
+                                  <br />
+                                  EQA: {site.eqa}
+                                </>
                               </SheetDescription>
                               <Separator className="my-4" />
                               <Accordion type="single" collapsible className="w-full ">
@@ -137,32 +148,16 @@ export default function Sites() {
                                           <TableHead className="text-black">Address</TableHead>
                                           <TableHead className="text-black">Program</TableHead>
                                           <TableHead className="text-black">Property Type</TableHead>
-                                          <TableHead className="text-black">Notes</TableHead>
-                                          <TableHead className="text-black">Number of Wells</TableHead>
-                                          <TableHead className="text-black">Sampling Eligibility</TableHead>
-                                          <TableHead className="text-black">Sampling Address Clean</TableHead>
-                                          <TableHead className="text-black">Sampling City State ZIP</TableHead>
-                                          <TableHead className="text-black">Property Notes</TableHead>
-                                          <TableHead className="text-black">Multiple Wells</TableHead>
-                                          <TableHead className="text-black">Shared Well Addresses</TableHead>
-                                          <TableHead className="text-black">Long Term Solution</TableHead>
-                                          <TableHead className="text-black">Well Depth</TableHead>
-                                          <TableHead className="text-black">Treatment</TableHead>
                                           <TableHead className="text-black">Local Health Dept</TableHead>
-                                          <TableHead className="text-black">Owner First Name 1</TableHead>
-                                          <TableHead className="text-black">Owner Last Name 1</TableHead>
-                                          <TableHead className="text-black">Owner First Name 2</TableHead>
-                                          <TableHead className="text-black">Owner Last Name 2</TableHead>
+                                          <TableHead className="text-black">Owner 1</TableHead>
+                                          <TableHead className="text-black">Owner 2</TableHead>
                                           <TableHead className="text-black">Owner Phone 1</TableHead>
                                           <TableHead className="text-black">Owner Phone 2</TableHead>
                                           <TableHead className="text-black">Owner Email</TableHead>
                                           <TableHead className="text-black">Owner Mailing Address</TableHead>
                                           <TableHead className="text-black">Owner Mailing City State Zip</TableHead>
-                                          <TableHead className="text-black">Owner Notes</TableHead>
-                                          <TableHead className="text-black">Tenant First Name 1</TableHead>
-                                          <TableHead className="text-black">Tenant Last Name 1</TableHead>
-                                          <TableHead className="text-black">Tenant First Name 2</TableHead>
-                                          <TableHead className="text-black">Tenant Last Name 2</TableHead>
+                                          <TableHead className="text-black">Tenant 1</TableHead>
+                                          <TableHead className="text-black">Tenant 2</TableHead>
                                           <TableHead className="text-black">Tenant Phone 1</TableHead>
                                           <TableHead className="text-black">Tenant Phone 2</TableHead>
                                           <TableHead className="text-black">Tenant Email</TableHead>
@@ -195,14 +190,14 @@ export default function Sites() {
                                     </Table>
                                     <div className="flex justify-start mt-4 space-x-2">
                                       <Button
-                                        className="bg-som-primary text-white hover:bg-som-primary hover:text-white hover:-translate-y-0.5 transition-all duration-300"
+                                        className="bg-som-primary text-white hover:bg-som-primary hover:text-white"
                                         variant="outline"
                                       >
                                         Add Address
                                       </Button>
                                       <Button
                                         variant="outline"
-                                        className="bg-som-primary text-white hover:bg-som-primary hover:text-white hover:-translate-y-0.5 transition-all duration-300"
+                                        className="bg-som-primary text-white hover:bg-som-primary hover:text-white"
                                       >
                                         Edit Address
                                       </Button>
@@ -219,9 +214,11 @@ export default function Sites() {
                       </Tooltip>
                     </TooltipProvider>
                   </TableCell>
-                  <TableCell>{site.sampling_type}</TableCell>
                   <TableCell>{site.toxicologist}</TableCell>
-                  <TableCell>{site.project_manager}</TableCell>
+                  <TableCell>{site.eqa}</TableCell>
+                  <TableCell>{placeholders.deh_contact}</TableCell>
+                  <TableCell>{placeholders.egle_contact}</TableCell>
+                  <TableCell>{placeholders.lhd_contact}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
