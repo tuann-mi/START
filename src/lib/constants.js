@@ -25,7 +25,7 @@ export const programs = ["PFAS Response", "Harmful Algal Blooms", "PFAS Site Res
 export const colorPalette = {
   monochromaticGreen: ["#b9e8cc", "#98dcb5", "#3ac681", "#2db06d", "#209a59"],
   monochromaticPurple: ["#d9c4e7", "#c4a6d8", "#a06abf", "#8451a3", "#6a3888"],
-  vibrant: ["#4835c7", "#8436c4", "#d33747", "#fa8655", "#2bbb85"],
+  vibrant: ["#4835c7", "#8436c4", "#FF0000", "#FFA500", "#008000"],
   som: ["#437c4a", "#257651", "#39789d", "#576ea7"],
   monochromaticSom: ["#afcbca", "#89afad", "#1c6864", "#125552"],
 };
