@@ -13,6 +13,8 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 import { useSearchParams } from "next/navigation";
 import { useSiteOverview } from "@/lib/queries";
 
+export const runtime = "edge";
+
 const placeholders = {
   deh_contact: "TBD",
   egle_contact: "TBD",
