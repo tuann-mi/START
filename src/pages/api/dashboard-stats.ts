@@ -97,11 +97,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       analyteDistribution: result.rows[0].analyteDistribution,
     };
 
-    console.log(
-      new Date().toLocaleTimeString(),
-      " - dashboard-stats.ts - stats.analyteDistribution - ",
-      stats.analyteDistribution,
-    );
+    console.log(new Date().toLocaleTimeString(), " - dashboard-stats.ts - Full query executed successfully.");
     res.status(200).json(stats);
   } catch (error) {
     res.status(500).json({ error: "Failed to fetch dashboard data" });
