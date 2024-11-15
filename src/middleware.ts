@@ -19,6 +19,7 @@ export function middleware(request: NextRequest) {
       );
       const url = new URL("/login", request.url);
       url.searchParams.set("callbackUrl", pathname);
+      url.searchParams.set("message", "Please sign in to continue");
       return NextResponse.redirect(url);
     }
     console.log(new Date().toLocaleTimeString(), " - middleware.ts - Got token");
