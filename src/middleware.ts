@@ -13,7 +13,7 @@ export function middleware(request: NextRequest) {
       return NextResponse.next();
     }
     if (!token) {
-      console.log(
+      console.error(
         new Date().toLocaleTimeString(),
         " - middleware.ts - Unable to get token. Check that user is logged in.",
       );
@@ -36,12 +36,17 @@ export const config = {
      * - _next/static (static files)
      * - _next/image (image optimization files)
      * - favicon.ico, sitemap.xml, robots.txt (metadata files)
+     * Also check for:
+     * - Presence of the authjs.session-token cookie,
+     * - Presence of the next-router-prefetch header,
+     * - Presence of the purpose header with value "prefetch",
      */
     {
       source: "/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)",
-      has: [
+      missing: [
         { type: "header", key: "next-router-prefetch" },
         { type: "header", key: "purpose", value: "prefetch" },
+        { type: "cookie", key: "authjs.session-token" },
       ],
     },
   ],
