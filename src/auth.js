@@ -52,9 +52,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       if (credentials) {
         const user = await verifyCredentials(credentials);
         if (user) {
-          await createSession(user.id);
+          // await createSession(user.id);
+          return true;
         }
-        return true;
       }
       if (account?.provider === "google") {
         return profile.email_verified && profile.email.endsWith("@gmail.com");
