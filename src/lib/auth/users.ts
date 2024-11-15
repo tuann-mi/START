@@ -7,7 +7,7 @@ export async function getUserByUsername(username: string): Promise<User | null> 
   try {
     await client.connect();
     const result = await client.query(`SELECT * FROM "user" WHERE username = $1`, [username]);
-    console.log("User found:", result.rows[0]);
+    console.log("User id", result.rows[0]?.id, "found");
     return result.rows[0] || null;
   } catch (error) {
     console.error("Error fetching user:", error);
