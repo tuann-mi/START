@@ -97,7 +97,7 @@ export default function Login() {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-som-primary text-white p-2 rounded disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-som-primary text-white p-2 hover:underline rounded disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isLoading ? <LoadingSpinner className="flex items-center justify-center" /> : "Sign in with Credentials"}
             </button>

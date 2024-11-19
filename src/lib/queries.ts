@@ -75,3 +75,10 @@ export function useDashboardStats() {
     queryFn: () => fetchAPI("dashboard-stats"),
   });
 }
+
+export function useGetUsers() {
+  return useSuspenseQuery({
+    queryKey: ["getUsers"],
+    queryFn: () => fetchAPI("get-users"),
+  });
+}
