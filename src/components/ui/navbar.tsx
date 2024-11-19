@@ -39,12 +39,12 @@ export default function Navbar() {
       <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div id="navbar-left" className="flex">
-            {/* <div className="flex-shrink-0 flex items-center">
-              <Link href="/" className="text-2xl font-bold text-green-600 dark:text-green-400">
-                MiEHCOS
+            <div className="flex-shrink-0 flex items-center">
+              <Link href="/" className="text-2xl font-bold text-som-primary">
+                START
               </Link>
-            </div> */}
-            <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
+            </div>
+            <div className="hidden sm:ml-8 sm:flex sm:space-x-8">
               {navItems.map((item) => (
                 <Link
                   key={item.name}

@@ -19,7 +19,7 @@ export default function RootLayout({ children }) {
         >
           <ThemeProvider>
             <QueryProvider>
-              <MiHeader />
+              {/* <MiHeader /> */}
               <Navbar />
               <div className="flex-grow flex flex-col h-screen">
                 <main className="flex-grow flex items-center justify-center">{children}</main>

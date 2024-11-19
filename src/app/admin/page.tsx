@@ -4,7 +4,7 @@ import { SectionHeader, PageHeader } from "@/components/ui/headers";
 import { SectionContainer, SubSectionContainer } from "@/components/ui/content-containers";
 import { Table, TableHeader, TableBody, TableHead, TableRow, TableCell } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-import { FilePenLine } from "lucide-react";
+import { FilePenLine, CirclePlus } from "lucide-react";
 import { capitalizeFirstLetter } from "@/lib/utils";
 import { useState } from "react";
 import { useGetUsers } from "@/lib/queries";
@@ -33,6 +33,7 @@ export default function AdminPage() {
     }
   };
 
+  let nextUserId = users?.length + 1;
   return (
     <div className="w-full p-4 max-w-[1200px]">
       <PageHeader title="Admin" />
@@ -46,7 +47,7 @@ export default function AdminPage() {
           </div>
         </div>
         <SubSectionContainer>
-          <Table>
+          <Table className="transition-all duration-200">
             <TableHeader>
               <TableRow>
                 <TableHead>User ID</TableHead>
@@ -73,54 +74,61 @@ export default function AdminPage() {
                 </TableRow>
               ))}
               {showCreateNewUser && (
-                <TableRow className="transition-all ">
-                  <TableCell>
-                    <></>
-                  </TableCell>
-                  <TableCell className="w-full">
-                    <input
-                      type="text"
-                      name="username"
-                      value={newUser.username}
-                      onChange={handleInputChange}
-                      placeholder="Username"
-                      className="p-2 border"
-                    />
-                  </TableCell>
-                  <TableCell className="w-full flex flex-row space-x-2">
-                    <input
-                      type="text"
-                      name="firstName"
-                      value={newUser.firstName}
-                      onChange={handleInputChange}
-                      placeholder="First Name"
-                      className="p-2 border"
-                    />
-                    <input
-                      type="text"
-                      name="lastName"
-                      value={newUser.lastName}
-                      onChange={handleInputChange}
-                      placeholder="Last Name"
-                      className="p-2 border"
-                    />
-                  </TableCell>
-                  <TableCell>
-                    <input
-                      type="text"
-                      name="userGroup"
-                      value={newUser.userGroup}
-                      onChange={handleInputChange}
-                      placeholder="Role"
-                      className="p-2 border"
-                    />
-                  </TableCell>
-                  <TableCell>
-                    <button onClick={handleSubmit} className="bg-blue-500 text-white p-2 rounded">
-                      Submit
-                    </button>
-                  </TableCell>
-                </TableRow>
+                <>
+                  <TableRow className="hover:bg-white">
+                    <TableCell>
+                      <p>{nextUserId}</p>
+                    </TableCell>
+                    <TableCell className="w-full pl-2">
+                      <input
+                        type="text"
+                        name="username"
+                        value={newUser.username}
+                        onChange={handleInputChange}
+                        placeholder="Username"
+                        className="p-2 border-b"
+                      />
+                    </TableCell>
+                    <TableCell className="w-full flex flex-row space-x-2 pl-2">
+                      <input
+                        type="text"
+                        name="firstName"
+                        value={newUser.firstName}
+                        onChange={handleInputChange}
+                        placeholder="First Name"
+                        className="p-2 border-b"
+                      />
+                      <input
+                        type="text"
+                        name="lastName"
+                        value={newUser.lastName}
+                        onChange={handleInputChange}
+                        placeholder="Last Name"
+                        className="p-2 border-b"
+                      />
+                    </TableCell>
+                    <TableCell className="pl-2">
+                      <input
+                        type="text"
+                        name="userGroup"
+                        value={newUser.userGroup}
+                        onChange={handleInputChange}
+                        placeholder="Role"
+                        className="p-2 border-b"
+                      />
+                    </TableCell>
+                    <TableCell>
+                      <button onClick={handleSubmit} className="bg-blue-500 text-white p-2 rounded">
+                        Submit
+                      </button>
+                    </TableCell>
+                  </TableRow>
+                  <TableRow className="hover:bg-white">
+                    <TableCell>
+                      <CirclePlus color="#000000" />
+                    </TableCell>
+                  </TableRow>
+                </>
               )}
             </TableBody>
           </Table>
