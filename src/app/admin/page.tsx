@@ -9,6 +9,8 @@ import { capitalizeFirstLetter } from "@/lib/utils";
 import { useState } from "react";
 import { useGetUsers } from "@/lib/queries";
 
+export const runtime = "edge";
+
 export default function AdminPage() {
   const { data: users } = useGetUsers();
   const [showCreateNewUser, setShowCreateNewUser] = useState(false);
